@@ -1,1 +1,4 @@
-theme: jekyll-theme-minimal
+includes:
+  - _includes/head.html
+theme: jekyll-theme-midnight
+title: "Aldo Bernardi - Data Scientist"
