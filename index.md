@@ -18,7 +18,6 @@ layout: default
 - Filtros por renda e localização  
 
 ## 📊 Códigos Fonte
-- [🔗 Notebook interativo (Nbviewer)](https://nbviewer.jupyter.org/github/aldber/DataScience-Portfolio/blob/main/notebooks/california_housing.ipynb)
 - [📁 Código no GitHub](https://github.com/aldber/DataScience-Portfolio/tree/main/notebooks)
 
 ---
