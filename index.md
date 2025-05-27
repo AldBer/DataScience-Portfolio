@@ -1,3 +1,9 @@
+---
+layout: default
+---
+
+<link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+
 # Portfólio Data Science - Aldo Bernardi
 
 ## 🚀 Projetos
@@ -18,4 +24,4 @@
 *Stay tuned!*
 
 ## 📬 Contato
-[LinkedIn](https://linkedin.com/in/seu-perfil) | [GitHub](https://github.com/aldber)
+[LinkedIn](https://linkedin.com/in/aldo-bernardi/) | [GitHub](https://github.com/aldber)
