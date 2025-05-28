@@ -1,0 +1,15 @@
+name: Atualização Criptomoedas
+on:
+  schedule:
+    - cron: '0 12 * * *'  # Executa diariamente ao meio-dia UTC
+  workflow_dispatch:       # Permite acionamento manual
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalar dependências
+        run: pip install yfinance pandas plotly ta
+      - name: Executar análise
+        run: python 02_Crypto_Analysis/scripts/technical_analysis.py

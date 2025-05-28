@@ -17,12 +17,20 @@ layout: default
 - Visualização interativa  
 - Filtros por renda e localização  
 
-## 📊 Códigos Fonte
-- [📁 Código no GitHub](https://github.com/aldber/DataScience-Portfolio/tree/main/notebooks)
+- [📁 Código Fonte](https://github.com/aldber/DataScience-Portfolio/tree/main/notebooks)
 
 ---
+### 2. Dashboard Criptomoedas
 
-### 2. Próximo Projeto (Em Breve!)
+[![BTC Analysis](02_Crypto_Analysis/assets/btc_analysis.png)](02_Crypto_Analysis/assets/crypto_dashboard.html)
+
+**Recursos:**
+- Candle sticks em tempo real
+- Indicadores técnicos
+
+- [📁 Código Fonte](02_Crypto_Analysis/notebooks/crypto_analysis.ipynb)
+
+### 3. Próximo Projeto (Em Breve!)
 *Stay tuned!*
 
 ## 📬 Contato
