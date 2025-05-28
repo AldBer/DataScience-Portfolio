@@ -33,5 +33,7 @@ layout: default
 ### 3. Próximo Projeto (Em Breve!)
 *Stay tuned!*
 
-## 📬 Contato
-[LinkedIn](https://linkedin.com/in/aldo-bernardi/) | [GitHub](https://github.com/aldber)
+## 👨‍💻 Sobre o Autor
+**Aldo Bernardi**  
+Cientista de Dados em formação  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/aldo-bernardi/) | [GitHub](https://github.com/aldber)
