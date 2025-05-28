@@ -1,0 +1,28 @@
+# ==== Sensíveis ====
+*.env
+*.key
+*.pem
+*.pub
+*_credentials.json
+
+# ==== Python ====
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+.pytest_cache/
+
+# ==== Dados ====
+*.tmp
+*.log
+*.cache
+*.parquet
+
+# ==== Sistemas ====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==== IDEs ====
+.vscode/
+.idea/
+*.swp
