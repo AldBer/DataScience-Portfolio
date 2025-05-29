@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<link rel="icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+<link rel="icon" href="{{ '/01_California_Housing/assets/images/favicon.ico' | relative_url }}">
 
 # Portfólio Data Science - Aldo Bernardi
 
@@ -18,7 +18,7 @@ layout: default
 - Filtros por renda e localização  
 
 - [📁 Código Fonte](https://github.com/aldber/DataScience-Portfolio/tree/main/notebooks)
-
+- [📥 Download Dados California](01_California_Housing/data/california_housing.csv){: .btn .btn-purple }
 ---
 ### 2. Dashboard Criptomoedas
 
@@ -35,5 +35,8 @@ layout: default
 
 ## 👨‍💻 Sobre o Autor
 **Aldo Bernardi**  
-Cientista de Dados em formação  
+Cientista de Dados em formação
+## Habilidades  
+- <i class="fas fa-chart-line"></i> Análise de Dados  
+- <i class="fas fa-robot"></i> Machine Learning  
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/aldo-bernardi/) | [GitHub](https://github.com/aldber)
