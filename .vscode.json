@@ -1,0 +1,7 @@
+.vscode/settings.json
+{
+    "python.pythonPath": "F:\\Miniconda3\\envs\\meus_llms\\python.exe",
+    "python.linting.enabled": true,
+    "python.terminal.activateEnvironment": true,
+    "jupyter.alwaysTrustNotebooks": true
+}

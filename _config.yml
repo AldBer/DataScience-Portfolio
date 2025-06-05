@@ -1,5 +1,5 @@
 includes:
   - _includes/head.html
   - _includes/favicon.ico
-theme: jekyll-theme-midnight
+theme: minima
 title: "Aldo Bernardi - Data Scientist"
