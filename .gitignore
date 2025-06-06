@@ -26,3 +26,19 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+
+# Pastas geradas automaticamente
+_site/
+.virtual_documents/
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Dados sensíveis/voláteis
+*.csv
+*.json
+*.db
+
+# Exceções (mantém dados específicos)
+!01_California_Housing/data/california_housing.csv
+!02_Crypto_Analysis/data/crypto_prices.csv
