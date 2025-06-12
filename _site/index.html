@@ -19,52 +19,115 @@
       <div class="wrapper">
         <link rel="icon" href="/_includes/favicon.ico" />
 
-<h1 id="portfólio-data-science---aldo-bernardi">Portfólio Data Science - Aldo Bernardi</h1>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-<h2 id="-projetos">🚀 Projetos</h2>
+<style>
+  :root {
+    --bg-dark: #121212;
+    --card-dark: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --accent: #6c63ff;
+    --hover: #7d75ff;
+  }
+  
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .project-card {
+    background-color: var(--card-dark);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 40px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--accent);
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    border-left: 4px solid var(--hover);
+  }
+  
+  .btn-accent {
+    background-color: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 8px 8px 8px 0;
+    transition: all 0.2s ease;
+    font-weight: 500;
+  }
+  
+  .btn-accent:hover {
+    background-color: var(--hover);
+    transform: scale(1.05);
+  }
+  
+  h1, h2, h3 {
+    color: var(--text-primary);
+  }
+  
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
+  }
+  
+  .skill-card {
+    background-color: var(--card-dark);
+    padding: 20px;
+    border-radius: 8px;
+    border-top: 3px solid var(--accent);
+  }
+</style>
+
+<h1 id="portfólio-de-ciência-de-dados--aldo-bernardi">Portfólio de Ciência de Dados <br /> <span style="color: var(--accent)">Aldo Bernardi</span></h1>
+
+<h2 id="-projetos-em-destaque">🚀 Projetos em Destaque</h2>
+
 <hr />
-<h3 id="1-análise-de-imóveis-3d">1. Análise de Imóveis 3D</h3>
-<p><a href="01_California_Housing/assets/3d_imoveis.html"><img src="01_California_Housing/assets/images/preview_3d.png" alt="Preview" /></a></p>
 
-<p><strong>Tecnologias:</strong> Python, Plotly, Pandas<br />
-<strong>Destaques:</strong></p>
+<h3 id="1-dashboard-imobiliário-3d---california-nova-versão">1. Dashboard Imobiliário 3D - California (Nova Versão)</h3>
+<p><a href="01_California_Housing/assets/3d_imoveis_dark.html"><img src="01_California_Housing/assets/images/preview_dark.png" alt="Preview" /></a></p>
+
+<p><strong>Tecnologias:</strong> Python, Plotly, GeoPandas<br />
+<strong>Recursos:</strong></p>
 <ul>
-  <li>Visualização interativa</li>
-  <li>
-    <p>Filtros por renda e localização</p>
-  </li>
-  <li><a href="https://github.com/aldber/DataScience-Portfolio/tree/main/notebooks">📁 Código Fonte</a></li>
-  <li><a href="01_California_Housing/data/california_housing.csv" class="btn btn-purple">📥 Download Dados California</a></li>
+  <li>Visualização noturna com filtros dinâmicos</li>
+  <li>Análise de tendências temporais</li>
+  <li>Integração com dados do Zillow API</li>
 </ul>
 
-<h3 id="2-dashboard-criptomoedas">2. Dashboard Criptomoedas</h3>
-
-<p><a href="02_Crypto_Analysis/assets/crypto_dashboard.html"><img src="02_Crypto_Analysis/assets/btc_analysis.png" alt="BTC Analysis" /></a></p>
-
-<p><strong>Recursos:</strong></p>
-<ul>
-  <li>Candle sticks em tempo real</li>
-  <li>
-    <p>Indicadores técnicos</p>
-  </li>
-  <li><a href="02_Crypto_Analysis/notebooks/crypto_analysis.ipynb">📁 Código Fonte</a></li>
-</ul>
-
-<h3 id="3-próximo-projeto-em-breve">3. Próximo Projeto (Em Breve!)</h3>
-<p><em>Stay tuned!</em></p>
+<p><a href="https://github.com/aldber/DataScience-Portfolio/tree/main/01_California_Housing" class="btn btn-accent">📁 Código Fonte</a><br />
+<a href="01_California_Housing/assets/3d_imoveis_dark.html" class="btn btn-accent">📊 Dashboard</a></p>
 
 <hr />
-<h2 id="-sobre-o-autor">👨‍💻 Sobre o Autor</h2>
-<p><strong>Aldo Bernardi</strong><br />
-Engenheiro de Produção
-Cientista de Dados em formação</p>
-<h2 id="habilidades">Habilidades</h2>
+
+<h2 id="2-análise-de-criptoativos">2. Análise de Criptoativos</h2>
+
+<p><a href="https://yourusername-streamlit-app.streamlit.app/"><img src="02_Crypto_Analysis/assets/images/preview.png" alt="Dashboard" /></a></p>
+
+<p><strong>Atualização Automática:</strong></p>
 <ul>
-  <li><i class="fas fa-chart-line"></i> Análise de Dados</li>
-  <li><i class="fas fa-robot"></i> Machine Learning<br />
-<strong>📩 Contato</strong></li>
+  <li>Dados renovados diariamente via GitHub Actions</li>
+  <li>Indicadores calculados em tempo real</li>
 </ul>
 
+<p><a href="https://yourusername-streamlit-app.streamlit.app/" class="btn btn-accent">📊 Acesse o Dashboard</a>
+<a href=".github/workflows/update_crypto.yaml" class="btn btn-accent">🔄 Código de Atualização</a></p>
+
+<p>👨‍💻 Perfil Técnico</p>
+<div class="skills-grid"> <div class="skill-card"> <h4><i class="fas fa-database"></i> Engenharia de Dados</h4> <ul> <li>Pipelines com Airflow</li> <li>APIs REST/GraphQL</li> <li>Spark para Big Data</li> </ul> </div> <div class="skill-card"> <h4><i class="fas fa-chart-line"></i> Análise</h4> <ul> <li>Séries Temporais</li> <li>Geoespacial (Kepler.gl)</li> <li>Visualização Interativa</li> </ul> </div> <div class="skill-card"> <h4><i class="fas fa-robot"></i> Machine Learning</h4> <ul> <li>XGBoost/LightGBM</li> <li>Redes Neurais</li> <li>AutoML (PyCaret)</li> </ul> </div> </div>
+
+<p>📬 Contato Profissional</p>
 <form action="https://formspree.io/f/seu-id" method="POST">
   <input type="text" name="name" placeholder="Seu Nome" required="" />
   <input type="email" name="_replyto" placeholder="Seu Email" required="" />
@@ -77,17 +140,8 @@ Cientista de Dados em formação</p>
   input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
 </style>
 
-<table>
-  <tbody>
-    <tr>
-      <td><em>Ou me encontre no</em><a href="https://linkedin.com/in/aldo-bernardi/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&amp;logo=linkedin" alt="LinkedIn" /></a></td>
-      <td><a href="https://github.com/aldber">GitHub</a></td>
-      <td><a href="https://mavenanalytics.io/profile/3831d340-70a1-70d5-9e73-7070b65b6224?view=projects">Maven</a></td>
-      <td><a href="https://learn.microsoft.com/pt-br/users/aldobernardi-7398/">Microsoft</a></td>
-    </tr>
-  </tbody>
-</table>
-
+<div style="margin-top:30px"> <a href="https://linkedin.com/in/aldo-bernardi/" target="_blank" class="btn-accent"> <i class="fab fa-linkedin"></i> LinkedIn </a> <a href="https://github.com/aldber" target="_blank" class="btn-accent"> <i class="fab fa-github"></i> GitHub </a> <a href="https://kaggle.com/aldobernardi" target="_blank" class="btn-accent"> <i class="fab fa-kaggle"></i> Kaggle </a> </div>
+<p>```</p>
 
       </div>
     </main><footer class="site-footer h-card">

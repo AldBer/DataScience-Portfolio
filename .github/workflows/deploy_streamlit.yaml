@@ -1,0 +1,15 @@
+name: Deploy Streamlit
+on:
+  push:
+    branches: [main]
+    paths:
+      - '02_Crypto_Analysis/scripts/**'
+      - '02_Crypto_Analysis/data/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install streamlit
+      - run: streamlit run 02_Crypto_Analysis/scripts/technical_analysis.py --server.port ${{ secrets.PORT }}
