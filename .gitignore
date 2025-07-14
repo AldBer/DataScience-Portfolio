@@ -43,3 +43,4 @@ __pycache__/
 !01_California_Housing/data/california_housing.csv
 !02_Crypto_Analysis/data/crypto_prices.csv.env
 .env
+.env
