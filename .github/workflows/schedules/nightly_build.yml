@@ -1,0 +1,26 @@
+name: Nightly Build and Test
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 1AM UTC every day
+  workflow_dispatch:
+
+jobs:
+  build:
+    uses: ./.github/workflows/_common_steps.yml
+    
+    steps:
+      - name: Run Tests
+        run: |
+          python -m pytest tests/ -v
+          
+      - name: Code Quality Check
+        run: |
+          pip install flake8 black
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          black --check .
+          
+      - name: Generate Reports
+        run: |
+          python scripts/generate_reports.py
+          echo "Reports generated at $(date)" >> reports.log

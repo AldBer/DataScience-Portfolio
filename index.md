@@ -3,16 +3,9 @@ layout: default
 dark_mode: true
 ---
 
-<!-- META SEO -->
-<title>Portfólio de Dados | Aldo Bernardi</title>
-<meta name="description" content="Portfólio de Ciência de Dados de Aldo Bernardi, com projetos em Python, SQL, BI e Machine Learning.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<!-- FAVICON & ICONS -->
 <link rel="icon" href="{{ '/_includes/favicon.ico' | relative_url }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<!-- STYLES -->
 <style>
   :root {
     --bg-dark: #121212;
@@ -22,23 +15,13 @@ dark_mode: true
     --accent: #6c63ff;
     --hover: #7d75ff;
   }
-
+  
   body {
     background-color: var(--bg-dark);
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0 20px;
   }
-
-  header {
-    position: sticky;
-    top: 0;
-    background-color: var(--bg-dark);
-    z-index: 999;
-    padding: 10px 0;
-  }
-
+  
   .project-card {
     background-color: var(--card-dark);
     border-radius: 12px;
@@ -48,13 +31,13 @@ dark_mode: true
     transition: all 0.3s ease;
     border-left: 4px solid var(--accent);
   }
-
+  
   .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0,0,0,0.4);
     border-left: 4px solid var(--hover);
   }
-
+  
   .btn-accent {
     background-color: var(--accent);
     color: white;
@@ -66,142 +49,122 @@ dark_mode: true
     transition: all 0.2s ease;
     font-weight: 500;
   }
-
+  
   .btn-accent:hover {
     background-color: var(--hover);
     transform: scale(1.05);
   }
-
+  
   h1, h2, h3 {
     color: var(--text-primary);
   }
-
+  
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin: 30px 0;
   }
-
+  
   .skill-card {
     background-color: var(--card-dark);
     padding: 20px;
     border-radius: 8px;
     border-top: 3px solid var(--accent);
   }
-
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 30px;
-    flex-wrap: wrap;
-  }
-
-  .profile-header img {
-    border-radius: 100px;
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border: 3px solid var(--accent);
-  }
-
-  @media(max-width: 600px) {
-    .profile-header {
-      flex-direction: column;
-      text-align: center;
-    }
-  }
 </style>
 
-<header>
-  <h1>Portfólio de Ciência de Dados - <span style="color: var(--accent)">Aldo Bernardi</span></h1>
-</header>
-
-<div class="profile-header">
-  <img src="https://avatars.githubusercontent.com/u/85644066" alt="Foto de Aldo Bernardi">
+<div class="profile-header" style="display: flex; align-items: center; gap: 20px; margin-bottom: 40px;">
+  <img src="https://avatars.githubusercontent.com/u/85644066" alt="Aldo Bernardi" style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid var(--accent);">
   <div>
-    <h2>🎯 Transformando dados em decisões inteligentes</h2>
-    <p>Especialista em Análise de Dados, SQL, Python, Dashboards e Machine Learning</p>
+    <h1 style="margin: 0;">Portfólio de Ciência de Dados</h1>
+    <h2 style="margin: 0; color: var(--accent);">Aldo Bernardi</h2>
+    <p>Transformando dados em decisões estratégicas</p>
   </div>
 </div>
-
----
 
 ## 🚀 Projetos em Destaque
 
-### 1. Dashboard Imobiliário 3D - Califórnia  
-📍 **Resumo**: Análise geográfica com filtros dinâmicos e visualização noturna.  
-🔧 **Tecnologias:** Python, Plotly, GeoPandas  
+Nesta seção, você encontrará os principais projetos desenvolvidos por Aldo Bernardi em ciência de dados, com foco em visualizações interativas, automações e insights aplicáveis a problemas reais.
 
-[📁 Código Fonte](https://github.com/aldber/DataScience-Portfolio/tree/main/01_California_Housing){: .btn .btn-accent }  
-[📊 Acessar Dashboard](01_California_Housing/assets/3d_imoveis_dark.html){: .btn .btn-accent }
+<div class="project-card">
+  <h3>Dashboard Imobiliário - São Paulo</h3>
+  <p><strong>Resumo:</strong> Análise geográfica avançada dos distritos de SP</p>
+  <p><strong>Tecnologias:</strong> Python, GeoPandas, Folium</p>
+  <a href="/01_SP_Housing/notebooks/" class="btn">📁 Código Fonte</a>
+  <a href="/01_SP_Housing/assets/interactive/mapa_calor.html" class="btn">📊 Acessar Dashboard</a>
+</div>
 
----
+<div class="project-card">
+  <h3>Monitor de Criptoativos</h3>
+  <p><strong>Resumo:</strong> Análise automática de oportunidades de trading</p>
+  <p><strong>Tecnologias:</strong> Python, Streamlit, GitHub Actions</p>
+  <a href="https://aldber-crypto.streamlit.app/" class="btn">📊 Ver Dashboard</a>
+  <a href=".github/workflows/crypto_bot.yml" class="btn">🔁 Workflow GitHub</a>
+</div>
 
-### 2. Análise Automatizada de Criptoativos  
-📍 **Resumo**: Dashboard com atualização diária automática via GitHub Actions.  
-🔧 **Tecnologias:** Streamlit, Python, GitHub Actions  
+## 📊 Projetos SQL e Business Intelligence
 
-[📊 Ver Dashboard](https://yourusername-streamlit-app.streamlit.app/){: .btn .btn-accent }  
-[🔁 Workflow GitHub](.github/workflows/update_crypto.yaml){: .btn .btn-accent }
+Esta seção acompanha o desenvolvimento semanal do aprendizado em SQL de Aldo Bernardi, com foco em manipulação de dados, geração de KPIs e integração com ferramentas de visualização como Power BI.
 
----
+<div class="project-card">
+  <h3>Semana 01 – Fundamentos de SQL</h3>
+  <p><strong>Atividades:</strong></p>
+  <ul>
+    <li>Importação de base de imóveis reais (São Paulo)</li>
+    <li>Criação da estrutura de banco de dados</li>
+    <li>Consultas básicas: SELECT, WHERE, ORDER BY, LIMIT</li>
+  </ul>
+  <a href="/03_SQL-BI-Projects/Semana_01/" class="btn">📁 Ver Projeto</a>
+  <span>📄 Script: <code>queries_basicas_01.sql</code></span>
+</div>
 
-## 📊 Projetos com SQL & BI (em breve)
+<div class="project-card">
+  <h3>Semana 02 – Agregações e KPIs</h3>
+  <p><strong>Atividades:</strong></p>
+  <ul>
+    <li>Funções agregadas: AVG, SUM, COUNT, MIN, MAX</li>
+    <li>Agrupamentos com GROUP BY e filtros com HAVING</li>
+    <li>Exportação de dados para Power BI</li>
+    <li>Dashboard de KPIs com indicadores e mapa</li>
+  </ul>
+  <a href="/03_SQL-BI-Projects/Semana_02/" class="btn">📁 Ver Projeto</a>
+  <span>📊 Dashboard: <code>sp_kpis_dashboard.pbix</code></span>
+</div>
 
-> Esta seção trará relatórios desenvolvidos com SQL, Power BI e Python para análises corporativas, como:  
-- Vendas por região  
-- Análise de churn  
-- Rentabilidade de produtos
+## 🛠️ Habilidades Técnicas
 
-🔧 *Estamos desenvolvendo!*
+Você pode conhecer mais sobre minha experiência profissional acessando meu <a href="https://linkedin.com/in/aldo-bernardi/" target="_blank">perfil no LinkedIn</a>.
 
----
-
-## 👨‍💻 Perfil Técnico
-
-<div class="skills-grid">
-  <div class="skill-card">
-    <h4><i class="fas fa-database"></i> Engenharia de Dados</h4>
-    <ul>
-      <li>Pipelines com Airflow</li>
-      <li>APIs REST/GraphQL</li>
-      <li>Spark para Big Data</li>
-    </ul>
-  </div>
-  <div class="skill-card">
-    <h4><i class="fas fa-chart-line"></i> Análise de Dados</h4>
-    <ul>
-      <li>Séries Temporais</li>
-      <li>Geoanálise (Kepler.gl)</li>
-      <li>Visualização Interativa</li>
-    </ul>
-  </div>
-  <div class="skill-card">
-    <h4><i class="fas fa-robot"></i> Machine Learning</h4>
-    <ul>
-      <li>XGBoost / LightGBM</li>
-      <li>Redes Neurais</li>
-      <li>AutoML (PyCaret)</li>
-    </ul>
+<div class="project-card">
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+    <div>
+      <h4>Linguagens</h4>
+      <ul>
+        <li>🐍 Python (Pandas, NumPy)</li>
+        <li>🛢️ SQL (PostgreSQL, BigQuery)</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visualização</h4>
+      <ul>
+        <li>📊 Plotly, Power BI</li>
+        <li>🗺️ GeoPandas, Folium</li>
+      </ul>
+    </div>
+    <div>
+      <h4>Ferramentas</h4>
+      <ul>
+        <li>⚙️ Git, Docker</li>
+        <li>☁️ Google Cloud</li>
+      </ul>
+    </div>
   </div>
 </div>
 
----
+## 📬 Contato
 
-## 📬 Contato Profissional
-
-{% include contact_form.html %}
-
-<div style="margin-top:30px">
-  <a href="https://linkedin.com/in/aldo-bernardi/" target="_blank" class="btn-accent">
-    <i class="fab fa-linkedin"></i> LinkedIn
-  </a>
-  <a href="https://github.com/aldber" target="_blank" class="btn-accent">
-    <i class="fab fa-github"></i> GitHub
-  </a>
-  <a href="https://kaggle.com/aldobernardi" target="_blank" class="btn-accent">
-    <i class="fab fa-kaggle"></i> Kaggle
-  </a>
+<div class="project-card" style="text-align: center;">
+  <a href="https://linkedin.com/in/aldo-bernardi/" class="btn" target="_blank">LinkedIn</a>
+  <a href="https://github.com/aldber" class="btn" target="_blank">GitHub</a>
 </div>

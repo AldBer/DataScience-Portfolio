@@ -1,0 +1,21 @@
+name: Deploy Streamlit App
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'streams/**'
+      - '02_Crypto_Analysis/**'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/_common_steps.yml
+    
+    steps:
+      - name: Install Streamlit
+        run: pip install streamlit
+        
+      - name: Deploy
+        run: |
+          # Seu comando de deploy aqui
+          echo "Deploy logic would go here"

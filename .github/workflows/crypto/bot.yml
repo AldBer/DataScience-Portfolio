@@ -1,0 +1,19 @@
+name: Crypto Trading Bot
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+jobs:
+  trading:
+    uses: ./.github/workflows/_common_steps.yml
+    secrets: inherit  # Herda todos os secrets
+    
+    steps:
+      - name: Run Trading Bot
+        env:
+          BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
+          BINANCE_SECRET_KEY: ${{ secrets.BINANCE_SECRET_KEY }}
+        run: |
+          python -c "from 02_Crypto_Analysis.bots.trading_bot import execute_trade; execute_trade()"

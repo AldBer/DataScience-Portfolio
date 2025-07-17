@@ -1,5 +1,5 @@
 import ccxt  # Biblioteca para exchanges
-from telegram_bot import TelegramBot
+from 02_Crypto_Analysis.notifiers.telegram_bot import TelegramBot
 from dotenv import load_dotenv
 import os
 
