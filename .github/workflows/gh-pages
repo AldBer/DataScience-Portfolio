@@ -1,0 +1,34 @@
+name: Deploy Portfolio to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'index.md'
+      - '_config.yml'
+      - '_includes/**'
+      - '01_*/**'
+      - '02_*/**'
+      - '!**/*.csv'  # Ignora mudanças em arquivos de dados
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Build Jekyll Site
+        run: |
+          gem install jekyll
+          jekyll build --trace --destination ./_site
