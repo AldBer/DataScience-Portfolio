@@ -1,0 +1,45 @@
+name: Deploy Portfolio to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'index.md'
+      - '_config.yml'
+      - '_includes/**'
+      - '01_*/**'
+      - '02_*/**'
+      - '!**/*.csv'  # Ignora mudanças em arquivos de dados
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+          bundler-cache: true
+
+      - name: Build Jekyll Site
+        run: |
+          gem install jekyll
+          jekyll build --trace --destination ./_site
+          
+          # Preserva dados específicos que devem ser versionados
+          cp 01_California_Housing/data/california_housing.csv _site/01_California_Housing/data/
+          cp 02_Crypto_Analysis/data/crypto_prices.csv _site/02_Crypto_Analysis/data/
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          exclude_assets: '*.{csv,ipynb,py}'
