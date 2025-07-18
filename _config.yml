@@ -1,5 +1,8 @@
-includes:
-  - _includes/head.html
-  - _includes/favicon.ico
-theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Configurações mínimas necessárias
 title: "Aldo Bernardi - Data Scientist"
+description: Sua descrição
+theme: minima
