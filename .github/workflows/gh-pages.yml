@@ -12,12 +12,15 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-
-      - name: Prepare Files
-        run: |
-          mkdir -p _site
-          cp -r *.html *.md assets/ 01_SP_Housing/ 02_Crypto_Analysis/ _site/
-          ls -la _site  # Debug
+	- name: Prepare Files
+	  run: |
+	    mkdir -p _site
+	    # Copia apenas o que existe
+	    [ -d "assets" ] && cp -r assets _site/ || echo "Pasta assets não encontrada"
+	    [ -f "index.html" ] && cp index.html _site/ || echo "index.html não encontrado"
+	    [ -d "01_SP_Housing" ] && cp -r 01_SP_Housing _site/ || echo "Pasta 01_SP_Housing não encontrada"
+	    [ -d "02_Crypto_Analysis" ] && cp -r 02_Crypto_Analysis _site/ || echo "Pasta 02_Crypto_Analysis não encontrada"
+	    ls -la _site  # Debug
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
