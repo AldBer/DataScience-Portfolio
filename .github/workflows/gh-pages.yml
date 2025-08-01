@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Deploy Static Site
 
 on:
   push:
@@ -12,23 +12,16 @@ jobs:
     
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Clean Install
+      - name: Prepare Files
         run: |
-          rm -f Gemfile.lock
-          bundle config set --local path 'vendor/bundle'
-          bundle install
-
-      - name: Build site
-        run: |
-          bundle exec jekyll build --trace --destination ./_site
-          ls -la _site
+          mkdir -p _site
+          cp -r *.html *.md assets/ 01_SP_Housing/ 02_Crypto_Analysis/ _site/
+          ls -la _site  # Debug
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          force_orphan: true
+          keep_files: false
