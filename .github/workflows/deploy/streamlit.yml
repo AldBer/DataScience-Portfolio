@@ -4,18 +4,34 @@ on:
   push:
     branches: [main]
     paths:
-      - 'streams/**'
       - '02_Crypto_Analysis/**'
+      - '!02_Crypto_Analysis/data/**'  # Ignora dados pesados
 
 jobs:
   deploy:
-    uses: ./.github/workflows/_common_steps.yml
-    
+    runs-on: ubuntu-latest
     steps:
-      - name: Install Streamlit
-        run: pip install streamlit
-        
-      - name: Deploy
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
         run: |
-          # Seu comando de deploy aqui
-          echo "Deploy logic would go here"
+          pip install streamlit ccxt pandas plotly
+          
+      - name: Deploy to Streamlit Sharing
+        env:
+          STREAMLIT_TOKEN: ${{ secrets.STREAMLIT_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer $STREAMLIT_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repo": "AldBer/DataScience-Portfolio",
+              "branch": "main",
+              "filePath": "02_Crypto_Analysis/scripts/technical_analysis.py"
+            }' \
+            https://share.streamlit.io/api/deploy

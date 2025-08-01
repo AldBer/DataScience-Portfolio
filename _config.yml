@@ -1,8 +1,5 @@
+title: DataScience Portfolio
+description: Portfólio de projetos em Ciência de Dados
+theme: minima
 plugins:
   - jekyll-feed
-  - jekyll-seo-tag
-
-# Configurações mínimas necessárias
-title: "Aldo Bernardi - Data Scientist"
-description: Sua descrição
-theme: minima

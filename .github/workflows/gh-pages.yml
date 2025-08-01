@@ -7,18 +7,32 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Importante para o Jekyll
+
+      - name: Clean Ruby Environment
+        run: |
+          rm -f Gemfile.lock
+          echo "ruby '3.1.7'" > Gemfile
+          echo "source 'https://rubygems.org'" >> Gemfile
+          echo "gem 'github-pages', group: :jekyll_plugins" >> Gemfile
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-          bundler-cache: true
+          bundler-cache: false  # Desativa cache problemático
 
-      - name: Fix Platform Mismatch
+      - name: Install Jekyll
         run: |
-          bundle lock --add-platform x86_64-linux
+          gem install bundler jekyll
+          bundle config path vendor/bundle
+          bundle install
 
       - name: Build site
         run: |
