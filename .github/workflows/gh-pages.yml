@@ -1,27 +1,21 @@
-name: Deploy Static Site
+- name: Build Structure
+  run: |
+    mkdir -p _site
+    echo '<!DOCTYPE html>
+    <html>
+      <head>
+        <meta http-equiv="refresh" content="0; url=01_SP_Housing/">
+      </head>
+    </html>' > _site/index.html
+    cp -r 01_SP_Housing assets _site/ || echo "Algum arquivo não existe"
 
-on:
-  push:
-    branches: [main]
+- name: Validate Build
+  run: |
+    [ -f "_site/index.html" ] || exit 1
+    [ -d "_site/01_SP_Housing" ] || exit 1
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Prepare Files
-        run: |
-          mkdir -p _site
-          if [ -d "assets" ]; then cp -r assets _site/; fi
-          if [ -f "index.html" ]; then cp index.html _site/; fi
-          ls -la _site
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
+- uses: peaceiris/actions-gh-pages@v3
+  with:
+    github_token: ${{ secrets.GITHUB_TOKEN }}
+    publish_dir: ./_site
+    keep_files: false
