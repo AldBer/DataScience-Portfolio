@@ -47,4 +47,14 @@ vendor/
 .env
 .jekyll-metadata
 *.gem
-.bundle
+.bundle# Dados geográficos
+*.shp
+*.shx
+*.dbf
+
+# Notebooks temporários
+.ipynb_checkpoints/
+
+# Ambiente Python
+venv/
+__pycache__/

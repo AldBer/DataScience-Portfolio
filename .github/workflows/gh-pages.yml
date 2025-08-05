@@ -2,35 +2,41 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Mova para dentro do job
+    
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          lfs: true  # Adicione isso para Git LFS
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
       - name: Build Structure
         run: |
           mkdir -p _site
           echo '<!DOCTYPE html>
-          <html>
+          <html lang="pt-BR">
             <head>
+              <meta charset="UTF-8">
+              <title>Portfólio Data Science</title>
               <meta http-equiv="refresh" content="0; url=01_SP_Housing/">
             </head>
           </html>' > _site/index.html
-          cp -r 01_SP_Housing assets _site/ || echo "Algum arquivo não existe"
-
-      - name: Validate Build
-        run: |
-          [ -f "_site/index.html" ] || exit 1
-          [ -d "_site/01_SP_Housing" ] || exit 1
+          cp -r 01_SP_Housing 02_Crypto_Analysis assets _site/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          keep_files: false
+          force_orphan: true  # Limpa branch gh-pages completamente

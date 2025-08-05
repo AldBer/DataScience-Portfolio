@@ -1,7 +1,11 @@
-.vscode/settings.json
 {
-    "python.pythonPath": "F:\\Miniconda3\\envs\\meus_llms\\python.exe",
+    "python.pythonPath": "venv\\Scripts\\python.exe",  // Ou caminho do seu interpretador
+    "python.analysis.typeCheckingMode": "off",
     "python.linting.enabled": true,
-    "python.terminal.activateEnvironment": true,
-    "jupyter.alwaysTrustNotebooks": true
+    "python.linting.pylintEnabled": true,
+    "python.formatting.provider": "autopep8",
+    "files.autoSave": "afterDelay",
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    }
 }
