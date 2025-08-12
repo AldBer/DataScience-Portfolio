@@ -51,7 +51,7 @@ python dashboards/app.py
 | Data       | Tópico               | Progresso |
 |------------|----------------------|-----------|
 | 2025-08-03 | Integração Dash-LFS  | ✅        |
-| 2025-08-02 | GitHub Actions       | ⚙️       |
+| 2025-08-02 | GitHub Actions       | ⚙️        |
 | 2025-08-01 | Agents com LangChain | 📚        |
 
 ## 🤝 Contribuições

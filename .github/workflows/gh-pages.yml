@@ -8,13 +8,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # Mova para dentro do job
+      contents: write
     
     steps:
-      - name: Checkout repository
+      - name: Checkout repository + LFS
         uses: actions/checkout@v3
         with:
-          lfs: true  # Adicione isso para Git LFS
+          lfs: true  # Para baixar arquivos grandes (shapefiles)
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -24,19 +24,21 @@ jobs:
       - name: Build Structure
         run: |
           mkdir -p _site
+          # Página de redirecionamento
           echo '<!DOCTYPE html>
-          <html lang="pt-BR">
+          <html>
             <head>
-              <meta charset="UTF-8">
-              <title>Portfólio Data Science</title>
-              <meta http-equiv="refresh" content="0; url=01_SP_Housing/">
+              <meta http-equiv="refresh" content="0; url=dashboards/" />
             </head>
           </html>' > _site/index.html
-          cp -r 01_SP_Housing 02_Crypto_Analysis assets _site/
+          
+          # Copia apenas o necessário (ajuste os caminhos conforme sua estrutura real)
+          cp -r dashboards _site/
+          cp -r README.md _site/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./_site
-          force_orphan: true  # Limpa branch gh-pages completamente
+          force_orphan: true
