@@ -1,63 +1,31 @@
-# Portfólio de Data Science
+# Data Science Portfolio
 
-[![GitHub Pages](https://img.shields.io/badge/🌎-GitHub%20Pages-blue)](https://aldber.github.io/DataScience-Portfolio/)
-[![GitHub LFS](https://img.shields.io/badge/🗃️-Git%20LFS-red)](https://git-lfs.com)
+Portfólio profissional com projetos de análise de dados, dashboards interativos e automações.
 
-Repositório documentando minha evolução em Python, análise de dados e machine learning.
+## 🚀 Projetos em Destaque
 
-## 🚀 Projetos Destacados
+### 📊 Dashboards
 
-### 1. Análise de Mercado Imobiliário (SP)
-- **Técnicas usadas**:
-  - Geoprocessamento com GeoPandas
-  - Visualização com Plotly
-  - Dashboard interativo com Dash
-- [Acesse o projeto](01_SP_Housing/)
+#### 1. [Análise de Mercado Imobiliário - SP](dashboards/01_SP_Housing/)
+- Visualização georreferenciada de preços por distrito
+- Análise de tendências temporais
+- Tecnologias: Python, Geopandas, Plotly, Streamlit
 
-### 2. Análise Criptomoedas
-- **Recursos**:
-  - Web scraping de exchanges
-  - Análise técnica automatizada
-  - Bot de notícias via Telegram
-- [Explore aqui](02_Crypto_Analysis/)
+#### 2. [Monitoramento Criptomoedas](dashboards/02_Crypto_Analysis/)
+- Tracking de preços em tempo real
+- Análise técnica automatizada
+- Tecnologias: Python, CCXT, TA-Lib, Dash
 
-## 📈 Stack Tecnológica
+#### 3. [SQL + BI Projects](dashboards/03_SQL-BI-Projects/)
+- Conjunto de projetos com:
+  - ETL automatizado
+  - Dashboards Power BI/Tableau
+  - Consultas SQL avançadas
 
-```mermaid
-graph TD
-    A[Python] --> B[Pandas]
-    A --> C[Plotly/Dash]
-    A --> D[Scikit-learn]
-    B --> E[Análise de Dados]
-    C --> F[Visualização]
-    D --> G[Machine Learning]
-```
+## ⚙️ Bots & Automações
 
-## 🛠️ Como Executar
-
-```bash
-# Clone com Git LFS
-git lfs install
-git clone https://github.com/AldBer/DataScience-Portfolio.git
-
-# Instale dependências
-pip install -r requirements.txt
-
-# Execute o dashboard
-python dashboards/app.py
-```
-
-## 🌱 Aprendizados Recentes
-| Data       | Tópico               | Progresso |
-|------------|----------------------|-----------|
-| 2025-08-03 | Integração Dash-LFS  | ✅        |
-| 2025-08-02 | GitHub Actions       | ⚙️        |
-| 2025-08-01 | Agents com LangChain | 📚        |
-
-## 🤝 Contribuições
-Sugestões são bem-vindas! Abra uma issue ou:
 ```python
-print("Envie um PR! 🚀")
-```
-
-> "Dados são a nova matéria-prima do século XXI" - Adaptado de Tim Berners-Lee
+# bots/ (em desenvolvimento)
+# ├── property_scraper/  # Coleta dados imobiliários
+# ├── crypto_trader/     # Autotrading básico
+# └── social_analytics/  # Análise de redes sociais
