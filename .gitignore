@@ -7,15 +7,14 @@
 
 # ==== Python ====
 __pycache__/
-.ipynb_checkpoints/
 *.py[cod]
 .pytest_cache/
+venv/
 
-# ==== Dados ====
+# ==== Dados Temporários ====
 *.tmp
 *.log
 *.cache
-*.parquet
 
 # ==== Sistemas ====
 .DS_Store
@@ -27,36 +26,21 @@ desktop.ini
 .idea/
 *.swp
 
-# Pastas geradas automaticamente
+# ==== Pastas Geradas ====
 _site/
-.virtual_documents/
-.ipynb_checkpoints/
-__pycache__/
-*.pyc
 .jekyll-cache/
 vendor/
-
-# Dados sensíveis/voláteis
-*.csv
-*.json
-*.db
-
-# Exceções (mantém dados específicos)
-!01_California_Housing/data/california_housing.csv
-!02_Crypto_Analysis/data/crypto_prices.csv
-.env
-.jekyll-metadata
 *.gem
-.bundle# Dados geográficos
-*.shp
-*.shx
-*.dbf
+.bundle
 
-# Notebooks temporários
+# ==== Notebooks ====
 .ipynb_checkpoints/
 
-# Ambiente Python
-venv/
-__pycache__/
-__pycache__
-.ipynb_checkpoints
+# ==== Dados Ignorados (com exceções) ====
+*.parquet
+*.db
+!*.geojson  # Mantém arquivos geoespaciais processados
+
+# Exceções para dados específicos
+!dashboards/01_SP_Housing/data/processed/*.geojson
+!dashboards/02_Crypto_Analysis/data/*.csv
