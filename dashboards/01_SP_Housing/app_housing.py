@@ -52,27 +52,39 @@ col3.metric("Área Média", f"{filtered_df['area_m2'].mean():.1f}m²")
 
 # Visualização 1: Mapa de Calor por Distrito
 st.subheader("Distribuição Geográfica de Preços")
-print("Colunas disponíveis no filtered_df:")
-print(filtered_df.columns.tolist())
 
-print("\nColunas disponíveis no geo_df:")
-print(geo_df.columns.tolist())
-geo_merged = geo_df.merge(filtered_df.groupby('ds_name')['preco'].mean().reset_index(), 
-                         left_on='ds_name', right_on='ds_name')
+# Corrigindo o merge - usando ds_nome em vez de ds_name
+# Primeiro precisamos garantir que estamos usando a coluna correta para o merge
+# Como os bairros em filtered_df estão em 'bairro' e em geo_df em 'ds_nome',
+# precisamos verificar se os nomes são compatíveis
 
-fig_map = px.choropleth_mapbox(
-    geo_merged,
-    geojson=geo_merged.geometry,
-    locations=geo_merged.index,
-    color='preco',
-    hover_name='bairro',
-    mapbox_style="carto-positron",
-    center={"lat": -23.5505, "lon": -46.6333},
-    zoom=10,
-    opacity=0.5,
-    labels={'preco': 'Preço Médio (R$)'}
-)
-st.plotly_chart(fig_map, use_container_width=True)
+# Opção 1: Se os nomes são compatíveis (mesmo formato)
+try:
+    geo_merged = geo_df.merge(
+        filtered_df.groupby('bairro')['preco'].mean().reset_index(), 
+        left_on='ds_nome', 
+        right_on='bairro',
+        how='left'
+    )
+    
+    fig_map = px.choropleth_mapbox(
+        geo_merged,
+        geojson=geo_merged.geometry,
+        locations=geo_merged.index,
+        color='preco',
+        hover_name='ds_nome',  # Usando ds_nome para hover
+        mapbox_style="carto-positron",
+        center={"lat": -23.5505, "lon": -46.6333},
+        zoom=10,
+        opacity=0.5,
+        labels={'preco': 'Preço Médio (R$)'}
+    )
+    st.plotly_chart(fig_map, use_container_width=True)
+    
+except Exception as e:
+    st.error(f"Erro ao criar mapa: {str(e)}")
+    st.write("Dados disponíveis em filtered_df:", filtered_df['bairro'].unique()[:10])
+    st.write("Dados disponíveis em geo_df:", geo_df['ds_nome'].unique()[:10])
 
 # Visualização 2: Gráfico de Barras (Preço Médio por Bairro)
 st.subheader("Preço Médio por Bairro")

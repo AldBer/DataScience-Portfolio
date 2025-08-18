@@ -42,4 +42,4 @@ pip install -r requirements.txt
 python script/process_geodata.py
 
 # Execute o dashboard (Streamlit)
-streamlit run app/main.py
+streamlit run app_housing/main.py
