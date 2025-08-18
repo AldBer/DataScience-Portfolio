@@ -1,52 +1,15 @@
-# Crypto Monitoring (Em Desenvolvimento)
+## Fluxo de Trabalho de Análise Cripto
 
-## 📊 Visão Geral
-Breve descrição do projeto e problema de negócio que resolve.
+1. `notebooks/binance_data_pipeline.ipynb`  
+   - Extração e limpeza de dados da Binance API  
+   - Protótipo inicial dos indicadores técnicos  
+   - Análise estatística exploratória
 
-## 🎯 Objetivos
-- Objetivo principal 1
-- Objetivo principal 2
-- Objetivo principal 3
+2. `scripts/technical_analysis.py`  
+   - Dashboard interativo com Streamlit  
+   - Visualizações otimizadas para tomada de decisão  
+   - Parâmetros customizáveis pelo usuário
 
-## 🛠️ Tecnologias Utilizadas
-- Python
-- Pandas
-- Plotly/Matplotlib
-- Streamlit (se aplicável)
-
-## 📁 Estrutura do Projeto
-```
-02-crypto-monitoring/
-├── README.md              # Este arquivo
-├── app.py                 # Aplicação principal (se houver)
-├── requirements.txt       # Dependências
-├── src/                   # Código fonte modular
-├── notebooks/             # Análises Jupyter
-├── assets/                # Imagens e recursos
-└── data/                  # Dados (se permitido)
-```
-
-## 🚀 Como Executar
-1. Instalar dependências:
+▶ Execute o dashboard final com:  
 ```bash
-pip install -r requirements.txt
-```
-
-2. Executar a aplicação:
-```bash
-streamlit run app.py
-```
-
-## 📈 Principais Resultados
-- Resultado 1
-- Resultado 2
-- Resultado 3
-
-## 📋 Próximos Passos
-- [ ] Melhoria 1
-- [ ] Melhoria 2
-- [ ] Melhoria 3
-
----
-**Desenvolvido por**: Aldo Bernardi  
-**Data**: 2025-08-18
+streamlit run scripts/technical_analysis.py
