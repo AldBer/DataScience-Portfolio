@@ -1,10 +1,249 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-    <title>Portfólio Aldo Bernardi</title>
-    <meta http-equiv="refresh" content="0; url=./01_SP_Housing/" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataScience Portfolio - Aldo Bertolini</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .dashboards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .dashboard-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .dashboard-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .dashboard-card p {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .dashboard-card .tech-stack {
+            margin-bottom: 20px;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: #f0f0f0;
+            color: #555;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin: 2px 4px 2px 0;
+        }
+
+        .dashboard-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .dashboard-link:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: scale(1.05);
+        }
+
+        .github-link {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .github-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+
+        .github-link a:hover {
+            opacity: 1;
+        }
+
+        .status-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .status-development {
+            background: #FF9800;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .dashboards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-    Redirecionando para o portfólio...
+    <div class="container">
+        <div class="header">
+            <h1>📊 DataScience Portfolio</h1>
+            <p>Dashboards interativos e análises de dados</p>
+        </div>
+
+        <div class="dashboards-grid">
+            <!-- SP Housing Dashboard -->
+            <div class="dashboard-card">
+                <div class="status-badge">Ativo</div>
+                <h3>🏠 Análise Imobiliária SP</h3>
+                <p>Dashboard interativo para análise do mercado imobiliário de São Paulo, com visualizações de preços, localização e tendências do mercado.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Plotly</span>
+                    <span class="tech-tag">Folium</span>
+                </div>
+                
+                <a href="01_SP_Housing/" class="dashboard-link">Ver Dashboard</a>
+            </div>
+
+            <!-- Adicione mais cards aqui conforme criar novos dashboards -->
+            <div class="dashboard-card">
+                <div class="status-badge status-development">Em Breve</div>
+                <h3>📈 Análise de Vendas</h3>
+                <p>Dashboard para análise de performance de vendas com KPIs, tendências temporais e segmentação de clientes.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Streamlit</span>
+                    <span class="tech-tag">Seaborn</span>
+                </div>
+                
+                <a href="#" class="dashboard-link" style="opacity: 0.6; cursor: not-allowed;">Em Desenvolvimento</a>
+            </div>
+
+            <!-- Card para adicionar mais projetos -->
+            <div class="dashboard-card">
+                <div class="status-badge status-development">Planejado</div>
+                <h3>🎯 Machine Learning Model</h3>
+                <p>Dashboard para visualização de modelos de machine learning, métricas de performance e predições interativas.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Streamlit</span>
+                </div>
+                
+                <a href="#" class="dashboard-link" style="opacity: 0.6; cursor: not-allowed;">Em Planejamento</a>
+            </div>
+        </div>
+
+        <div class="github-link">
+            <p><a href="https://github.com/AldBer/DataScience-Portfolio" target="_blank">
+                🔗 Ver código fonte no GitHub
+            </a></p>
+        </div>
+    </div>
+
+    <script>
+        // Adiciona uma animação suave ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.dashboard-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
 </body>
 </html>
