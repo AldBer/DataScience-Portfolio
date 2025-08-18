@@ -20,14 +20,14 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install -r 02_Crypto_Analysis/requirements.txt
+          pip install -r dashboards/02_Crypto_Analysis/requirements.txt
           
       - name: Run Analysis
         env:
           BINANCE_API_KEY: ${{ secrets.BINANCE_API_KEY }}
           BINANCE_SECRET_KEY: ${{ secrets.BINANCE_SECRET_KEY }}
         run: |
-          python 02_Crypto_Analysis/scripts/technical_analysis.py
+          python dashboards/02_Crypto_Analysis/scripts/technical_analysis.py
           
       - name: Commit and Push Changes
         run: |

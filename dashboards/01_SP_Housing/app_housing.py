@@ -57,8 +57,8 @@ print(filtered_df.columns.tolist())
 
 print("\nColunas disponíveis no geo_df:")
 print(geo_df.columns.tolist())
-geo_merged = geo_df.merge(filtered_df.groupby('bairro')['preco'].mean().reset_index(), 
-                         left_on='bairro', right_on='bairro')
+geo_merged = geo_df.merge(filtered_df.groupby('ds_name')['preco'].mean().reset_index(), 
+                         left_on='ds_name', right_on='ds_name')
 
 fig_map = px.choropleth_mapbox(
     geo_merged,
