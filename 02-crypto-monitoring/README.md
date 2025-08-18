@@ -22,8 +22,8 @@ Breve descrição do projeto e problema de negócio que resolve.
 ├── requirements.txt       # Dependências
 ├── src/                   # Código fonte modular
 ├── notebooks/             # Análises Jupyter
-├── assets/               # Imagens e recursos
-└── data/                 # Dados (se permitido)
+├── assets/                # Imagens e recursos
+└── data/                  # Dados (se permitido)
 ```
 
 ## 🚀 Como Executar
