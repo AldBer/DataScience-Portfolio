@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataScience Portfolio - Aldo Bertolini</title>
+    <title>Portfólio de Ciência de Dados - Aldo Bernardi</title>
+    <meta name="description" content="Portfólio de projetos em Ciência de Dados, SQL, Python e Visualização de Dados">
+    <meta name="keywords" content="ciência de dados, portfolio, python, sql, power bi, machine learning, aldo bernardi">
+    <meta property="og:image" content="/assets/images/portfolio-preview.png">
+    <link rel="icon" href="/_includes/favicon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --bg-dark: #0a0a0a;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --card-dark: #1a1a1a;
+            --card-hover: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #6c63ff;
+            --hover: #7d75ff;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,234 +35,674 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-primary);
+            background: var(--bg-dark);
             min-height: 100vh;
+        }
+
+        .hero-section {
+            background: var(--bg-gradient);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 0 20px;
+            position: relative;
         }
 
-        .header {
-            text-align: center;
-            color: white;
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 40px;
             margin-bottom: 40px;
-            padding: 40px 0;
         }
 
-        .header h1 {
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid rgba(255,255,255,0.3);
+            object-fit: cover;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-info h1 {
             font-size: 3em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .header p {
+        .profile-info h2 {
+            font-size: 1.5em;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 15px;
+        }
+
+        .profile-info p {
             font-size: 1.2em;
             opacity: 0.9;
+            margin-bottom: 25px;
         }
 
-        .dashboards-grid {
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-accent {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-accent:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .main-content {
+            background: var(--bg-dark);
+            padding: 60px 0;
+        }
+
+        .featured-project {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .dashboard-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            background: var(--card-dark);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
         }
 
-        .dashboard-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-        }
-
-        .dashboard-card::before {
+        .featured-project::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: var(--bg-gradient);
         }
 
-        .dashboard-card h3 {
-            color: #333;
+        .featured-image {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .featured-content h2 {
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .featured-content h3 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+
+        .featured-content p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            background: var(--bg-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .project-card {
+            background: var(--card-dark);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-left: 4px solid var(--accent);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            background: var(--card-hover);
+        }
+
+        .project-card h3 {
+            color: var(--text-primary);
             margin-bottom: 15px;
             font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .dashboard-card p {
-            color: #666;
-            margin-bottom: 20px;
+        .project-card p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
             line-height: 1.6;
         }
 
-        .dashboard-card .tech-stack {
+        .project-card ul {
+            color: var(--text-secondary);
             margin-bottom: 20px;
+            padding-left: 20px;
         }
 
-        .tech-tag {
-            display: inline-block;
-            background: #f0f0f0;
-            color: #555;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            margin: 2px 4px 2px 0;
+        .project-card ul li {
+            margin-bottom: 8px;
         }
 
-        .dashboard-link {
-            display: inline-block;
-            background: linear-gradient(45deg, #667eea, #764ba2);
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-project {
+            background: var(--accent);
             color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
             text-decoration: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-align: center;
+            font-size: 0.9em;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
         }
 
-        .dashboard-link:hover {
-            background: linear-gradient(45deg, #764ba2, #667eea);
+        .btn-project:hover {
+            background: var(--hover);
             transform: scale(1.05);
         }
 
-        .github-link {
-            text-align: center;
-            margin-top: 50px;
+        .btn-project.secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
         }
 
-        .github-link a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1em;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-        }
-
-        .github-link a:hover {
-            opacity: 1;
+        .btn-project.secondary:hover {
+            background: rgba(255,255,255,0.2);
+            color: var(--text-primary);
         }
 
         .status-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            background: #4CAF50;
-            color: white;
-            padding: 5px 10px;
+            padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.8em;
             font-weight: bold;
         }
 
+        .status-active {
+            background: var(--success);
+            color: white;
+        }
+
         .status-development {
-            background: #FF9800;
+            background: var(--warning);
+            color: white;
+        }
+
+        .skills-section {
+            margin-bottom: 60px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--card-dark);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent);
+        }
+
+        .skill-card h4 {
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skill-item {
+            margin-bottom: 20px;
+        }
+
+        .skill-item span {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .skill-bar-container {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-bar {
+            height: 100%;
+            background: var(--bg-gradient);
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: var(--card-dark);
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-section h3 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
             }
-            
-            .dashboards-grid {
+
+            .profile-info h1 {
+                font-size: 2.5em;
+            }
+
+            .featured-project {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .container {
-                padding: 10px;
+
+            .skills-grid {
+                grid-template-columns: 1fr;
             }
+
+            .social-links,
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            animation: fadeInUp 0.6s ease forwards;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>📊 DataScience Portfolio</h1>
-            <p>Dashboards interativos e análises de dados</p>
-        </div>
-
-        <div class="dashboards-grid">
-            <!-- SP Housing Dashboard -->
-            <div class="dashboard-card">
-                <div class="status-badge">Ativo</div>
-                <h3>🏠 Análise Imobiliária SP</h3>
-                <p>Dashboard interativo para análise do mercado imobiliário de São Paulo, com visualizações de preços, localização e tendências do mercado.</p>
-                
-                <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Streamlit</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">Plotly</span>
-                    <span class="tech-tag">Folium</span>
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="container">
+            <div class="profile-header">
+                <img src="https://avatars.githubusercontent.com/u/85644066" alt="Aldo Bernardi" class="profile-image">
+                <div class="profile-info">
+                    <h1>Portfólio de Ciência de Dados</h1>
+                    <h2>Aldo Bernardi</h2>
+                    <p>Transformando dados em decisões estratégicas</p>
+                    <div class="social-links">
+                        <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-accent" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                        <a href="https://github.com/aldber" class="btn-accent" target="_blank">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                        <a href="mailto:aldo.bernardi@gmail.com" class="btn-accent">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                    </div>
                 </div>
-                
-                <a href="01_SP_Housing/" class="dashboard-link">Ver Dashboard</a>
-            </div>
-
-            <!-- Adicione mais cards aqui conforme criar novos dashboards -->
-            <div class="dashboard-card">
-                <div class="status-badge status-development">Em Breve</div>
-                <h3>📈 Análise de Vendas</h3>
-                <p>Dashboard para análise de performance de vendas com KPIs, tendências temporais e segmentação de clientes.</p>
-                
-                <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Streamlit</span>
-                    <span class="tech-tag">Seaborn</span>
-                </div>
-                
-                <a href="#" class="dashboard-link" style="opacity: 0.6; cursor: not-allowed;">Em Desenvolvimento</a>
-            </div>
-
-            <!-- Card para adicionar mais projetos -->
-            <div class="dashboard-card">
-                <div class="status-badge status-development">Planejado</div>
-                <h3>🎯 Machine Learning Model</h3>
-                <p>Dashboard para visualização de modelos de machine learning, métricas de performance e predições interativas.</p>
-                
-                <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Scikit-learn</span>
-                    <span class="tech-tag">Streamlit</span>
-                </div>
-                
-                <a href="#" class="dashboard-link" style="opacity: 0.6; cursor: not-allowed;">Em Planejamento</a>
             </div>
         </div>
+    </div>
 
-        <div class="github-link">
-            <p><a href="https://github.com/AldBer/DataScience-Portfolio" target="_blank">
-                🔗 Ver código fonte no GitHub
-            </a></p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Featured Project -->
+            <div class="featured-project">
+                <img src="/01_SP_Housing/assets/images/distribuicao_precos.png" alt="Dashboard Imobiliário SP" class="featured-image">
+                <div class="featured-content">
+                    <h2>🏆 Projeto em Destaque</h2>
+                    <h3>Análise Imobiliária de São Paulo</h3>
+                    <p>Explore os padrões de preços por distrito com este dashboard interativo que combina análise geográfica avançada com visualizações 3D e mapas de calor interativos.</p>
+                    <div class="project-links">
+                        <a href="/01_SP_Housing/notebooks/" class="btn-project">
+                            <i class="fas fa-code"></i> Ver Notebooks
+                        </a>
+                        <a href="/01_SP_Housing/assets/interactive/mapa_calor.html" class="btn-project">
+                            <i class="fas fa-map"></i> Dashboard Interativo
+                        </a>
+                        <a href="01_SP_Housing/" class="btn-project">
+                            <i class="fas fa-home"></i> Acessar Projeto
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Projects Section -->
+            <h2 class="section-title">🚀 Projetos em Destaque</h2>
+            
+            <div class="projects-grid">
+                <!-- Crypto Monitor -->
+                <div class="project-card">
+                    <div class="status-badge status-active">Ativo</div>
+                    <h3><i class="fas fa-chart-line"></i> Monitor de Criptoativos</h3>
+                    <p><strong>Resumo:</strong> Sistema automatizado para análise de oportunidades de trading em criptomoedas com atualização horária via GitHub Actions.</p>
+                    <p><strong>Tecnologias:</strong> Python, Streamlit, CCXT, Telegram API, GitHub Actions</p>
+                    
+                    <div class="project-links">
+                        <a href="https://aldber-crypto.streamlit.app/" class="btn-project" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Ver Dashboard
+                        </a>
+                        <a href=".github/workflows/crypto_bot.yml" class="btn-project secondary">
+                            <i class="fas fa-code-branch"></i> Workflow
+                        </a>
+                    </div>
+                </div>
+
+                <!-- SP Housing Analysis -->
+                <div class="project-card">
+                    <div class="status-badge status-active">Ativo</div>
+                    <h3><i class="fas fa-home"></i> Análise Imobiliária SP</h3>
+                    <p>Dashboard completo para análise do mercado imobiliário de São Paulo com mapas interativos, visualizações 3D e análise geográfica avançada.</p>
+                    <p><strong>Tecnologias:</strong> Python, Streamlit, Pandas, Plotly, Folium, GeoPandas</p>
+                    
+                    <div class="project-links">
+                        <a href="01_SP_Housing/" class="btn-project">
+                            <i class="fas fa-chart-area"></i> Ver Dashboard
+                        </a>
+                        <a href="/01_SP_Housing/notebooks/" class="btn-project secondary">
+                            <i class="fas fa-book"></i> Notebooks
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SQL & BI Projects -->
+            <h2 class="section-title">📊 Projetos SQL e Business Intelligence</h2>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3><i class="fas fa-database"></i> Fundamentos de SQL</h3>
+                    <p><strong>Semana 01 - Atividades:</strong></p>
+                    <ul>
+                        <li>Importação de base de imóveis reais (São Paulo)</li>
+                        <li>Criação da estrutura de banco de dados</li>
+                        <li>Consultas básicas: SELECT, WHERE, ORDER BY, LIMIT</li>
+                    </ul>
+                    
+                    <div class="project-links">
+                        <a href="/03_SQL-BI-Projects/Semana_01/" class="btn-project">
+                            <i class="fas fa-folder-open"></i> Ver Projeto
+                        </a>
+                        <a href="#" class="btn-project secondary">
+                            <i class="fas fa-file-code"></i> queries_basicas_01.sql
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3><i class="fas fa-chart-bar"></i> Agregações e KPIs</h3>
+                    <p><strong>Semana 02 - Atividades:</strong></p>
+                    <ul>
+                        <li>Funções agregadas: AVG, SUM, COUNT, MIN, MAX</li>
+                        <li>Agrupamentos com GROUP BY e filtros com HAVING</li>
+                        <li>Exportação de dados para Power BI</li>
+                        <li>Dashboard de KPIs com indicadores e mapa</li>
+                    </ul>
+                    
+                    <div class="project-links">
+                        <a href="/03_SQL-BI-Projects/Semana_02/" class="btn-project">
+                            <i class="fas fa-chart-pie"></i> Ver Projeto
+                        </a>
+                        <a href="#" class="btn-project secondary">
+                            <i class="fas fa-file-powerpoint"></i> sp_kpis_dashboard.pbix
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="skills-section">
+                <h2 class="section-title">🛠️ Habilidades Técnicas</h2>
+                
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h4><i class="fas fa-code"></i> Linguagens de Programação</h4>
+                        
+                        <div class="skill-item">
+                            <span>Python (Pandas, NumPy, Scikit-learn)</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span>SQL (PostgreSQL, BigQuery)</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <h4><i class="fas fa-chart-line"></i> Visualização de Dados</h4>
+                        
+                        <div class="skill-item">
+                            <span>Plotly & Dash</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span>GeoPandas & Folium</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="75%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <span>Power BI</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-card">
+                        <h4><i class="fas fa-tools"></i> Ferramentas e DevOps</h4>
+                        
+                        <div class="skill-item">
+                            <span>Git & GitHub</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-item">
+                            <span>Docker</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="70%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <span>Streamlit</span>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section">
+                <h3>📬 Vamos Conversar</h3>
+                <p>Interessado em trabalhar juntos? Estou aberto a oportunidades e colaborações em projetos de ciência de dados.</p>
+                
+                <div class="contact-links">
+                    <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-accent" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                    <a href="https://github.com/aldber" class="btn-accent" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="mailto:aldo.bernardi@gmail.com" class="btn-accent">
+                        <i class="fas fa-envelope"></i> Enviar Email
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
-        // Adiciona uma animação suave ao carregar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.dashboard-card');
+        // Animação das barras de habilidades
+        function animateSkillBars() {
+            const skillBars = document.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width;
+            });
+        }
+
+        // Animação ao rolar a página
+        function handleScrollAnimations() {
+            const cards = document.querySelectorAll('.project-card, .skill-card');
             cards.forEach((card, index) => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight - 100) {
+                    setTimeout(() => {
+                        card.classList.add('animate-on-scroll');
+                    }, index * 100);
+                }
+            });
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animar barras de habilidades após carregamento
+            setTimeout(animateSkillBars, 1000);
+            
+            // Configurar observer para animações
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Aplicar observer aos cards
+            document.querySelectorAll('.project-card, .skill-card').forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(50px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 200);
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+
+        // Smooth scrolling para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
