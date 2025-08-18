@@ -8,33 +8,72 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
+      pages: write
+      id-token: write
     
     steps:
-      - name: Checkout repository + LFS
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          lfs: true  # Para baixar arquivos grandes (shapefiles)
+          lfs: true
 
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Build Structure
+      - name: Install dependencies (se necessário)
+        run: |
+          # Descomente se precisar instalar dependências Python
+          # pip install -r requirements.txt
+
+      - name: Build site structure
         run: |
           mkdir -p _site
-          # Página de redirecionamento
-          echo '<!DOCTYPE html>
-          <html>
-            <head>
-              <meta http-equiv="refresh" content="0; url=dashboards/" />
-            </head>
-          </html>' > _site/index.html
+          touch _site/.nojekyll
+
+          # Verifica se existe dashboards e copia
+          if [ -d "dashboards" ]; then
+            cp -r dashboards _site/
+            echo "Dashboards copiado"
+          else
+            echo "Pasta dashboards não encontrada!"
+            ls -la
+          fi
           
-          # Copia apenas o necessário (ajuste os caminhos conforme sua estrutura real)
-          cp -r dashboards _site/
-          cp -r README.md _site/
+          # Cria index.html de redirecionamento
+          cat > _site/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="pt-BR">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>DataScience Portfolio - Redirecionando...</title>
+              <meta http-equiv="refresh" content="0; url=dashboards/" />
+              <style>
+                body { 
+                  font-family: Arial, sans-serif; 
+                  text-align: center; 
+                  margin-top: 50px; 
+                }
+              </style>
+            </head>
+            <body>
+              <h1>Redirecionando para os Dashboards...</h1>
+              <p>Se não for redirecionado automaticamente, <a href="dashboards/">clique aqui</a>.</p>
+            </body>
+          </html>
+          EOF
+          
+          # Copia outros arquivos importantes
+          if [ -f "README.md" ]; then
+            cp README.md _site/
+          fi
+          
+          # Lista o que foi criado para debug
+          echo "Estrutura criada:"
+          find _site -type f
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
