@@ -1,7 +1,0 @@
-*.geojson filter=lfs diff=lfs merge=lfs -text
-*.zip filter=lfs diff=lfs merge=lfs -text
-*.pbix filter=lfs diff=lfs merge=lfs -text
-*.dbf filter=lfs diff=lfs merge=lfs -text
-*.shp filter=lfs diff=lfs merge=lfs -text
-*.shx filter=lfs diff=lfs merge=lfs -text
-*.novoformato filter=lfs diff=lfs merge=lfs -text
