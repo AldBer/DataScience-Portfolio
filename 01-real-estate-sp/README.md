@@ -183,12 +183,6 @@ Contribuições são bem-vindas! Por favor:
 
 ---
 
-## 📄 **Licença**
-
-Este projeto está sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
 <div align="center">
   
 **⭐ Gostou do projeto? Deixe uma estrela!**
