@@ -1,0 +1,40 @@
+/* Estilos customizados para o Real Estate Dashboard */
+
+/* Container principal */
+.main > div {
+    padding-top: 2rem;
+}
+
+/* Métricas */
+.metric-container {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    padding: 1rem;
+    border-radius: 10px;
+    color: white;
+    margin: 0.5rem 0;
+}
+
+/* Cards */
+.css-1r6slb0 {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border-radius: 10px;
+    padding: 1rem;
+    border-left: 4px solid #667eea;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Sidebar */
+.css-1d391kg {
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+}
+
+/* Mapas */
+.plotly-graph-div {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

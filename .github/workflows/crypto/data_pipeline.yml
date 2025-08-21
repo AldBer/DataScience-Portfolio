@@ -25,7 +25,7 @@ jobs:
           
       - name: Run data update
         run: |
-          python 02_Crypto_Analysis/scripts/data_fetcher.py
+          python dashboards/02_Crypto_Analysis/scripts/data_fetcher.py
           
       - name: Commit changes
         run: |

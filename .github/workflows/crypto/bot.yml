@@ -20,7 +20,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install -r dashboards/02_Crypto_Analysis/requirements.txt
+          pip install -r dashboards/02_Crypto_Analysis/scripts/requirements.txt
           
       - name: Run Analysis
         env:

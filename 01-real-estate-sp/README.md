@@ -176,7 +176,7 @@ Contribuições são bem-vindas! Por favor:
 
 ## 📞 **Contato**
 
-**Aldo Berdugo** - Data Scientist
+**Aldo Bernardi** - Data Scientist
 - 💼 [LinkedIn](https://linkedin.com/in/aldo-berdugo)
 - 🐱 [GitHub](https://github.com/AldBer)
 - 📧 [Email](mailto:aldo.berdugo@email.com)
