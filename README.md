@@ -77,10 +77,6 @@ Feedbacks e sugestões são sempre bem-vindos! Sinta-se à vontade para:
 - Fazer fork do repositório
 - Enviar pull requests com melhorias
 
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
-
 ---
 
 ⭐ **Se este portfólio te ajudou de alguma forma, considere dar uma estrela no repositório!**
