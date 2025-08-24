@@ -1,10 +1,10 @@
-import dash_bootstrap_components as dbc  # Adicione esta linha
-from dash import html  # Adicione esta linha
+import dash_bootstrap_components as dbc
 
 def create_navbar():
-    return dbc.NavbarSimple(
-        brand="Portfólio IA",
+    navbar = dbc.NavbarSimple(
+        brand="Meu Dashboard",
         brand_href="#",
         color="primary",
-        dark=True
+        dark=True,
     )
+    return navbar

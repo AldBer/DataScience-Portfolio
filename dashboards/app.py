@@ -15,20 +15,24 @@ app.layout = html.Div([
         create_card(
             "SP Housing", 
             "Análise de mercado imobiliário", 
-            "/sp-housing"
+            "../01-real-estate-sp/app_housing/main.py"
         ),
         create_card(
             "Crypto Analysis", 
             "Dashboard de criptomoedas", 
-            "/crypto"
+            "../02-crypto-monitoring/scripts/technical_analysis.py"
         )
-    ], style={"display": "flex"}),
+    ], style={"display": "flex", "flexWrap": "wrap", "padding": "20px"}),
     
     # Abas para IA Agents
     dcc.Tabs([
         dcc.Tab(label='Trading Bot', children=[
-            html.Button("Analisar BTC", id='analyze-btn'),
-            html.Div(id='bot-output')
+            html.Div([
+                html.Button("Analisar BTC", id='analyze-btn', 
+                          style={'margin': '20px', 'padding': '10px 20px'}),
+                html.Div(id='bot-output', 
+                        style={'padding': '20px', 'fontSize': '18px'})
+            ])
         ])
     ])
 ])
@@ -40,4 +44,8 @@ app.layout = html.Div([
 )
 def update_output(n):
     if n:
-        return f"Sinal: {bot.analyze('BTC')}"
+        return f"💰 Sinal: {bot.analyze('BTC')}"
+    return "Clique no botão para analisar BTC"
+
+if __name__ == '__main__':
+    app.run_server(debug=True, port=8050)
