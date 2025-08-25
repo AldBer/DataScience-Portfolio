@@ -117,7 +117,9 @@ def load_data():
         properties = pd.read_csv(csv_path, encoding='utf-8')
         
         # Método atualizado para ler GeoJSON - compatível com Fiona 1.10.1
-        geodata = gpd.read_file(str(geojson_path))  # Converte Path para string
+        with open(geojson_path, 'r') as f:
+            geojson_data = json.load(f)
+        geodata = gpd.GeoDataFrame.from_features(geojson_data["features"])
         
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
