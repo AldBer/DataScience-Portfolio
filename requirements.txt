@@ -3,7 +3,3 @@ pandas
 numpy
 plotly
 geopandas==0.14.0
-fiona==1.9.6
-shapely==2.0.4
-pyproj==3.6.1
-gdal==3.6.4
