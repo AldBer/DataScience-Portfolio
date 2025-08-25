@@ -109,16 +109,30 @@ def load_data():
         csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
         geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
         
-        # Debug: Mostra os caminhos que está tentando usar
-        st.sidebar.info(f"CSV Path: {csv_path}")
-        st.sidebar.info(f"GeoJSON Path: {geojson_path}")
+        # Debug: Verifica se os arquivos existem e mostram o tamanho
+        st.sidebar.info(f"CSV existe: {csv_path.exists()}, Tamanho: {csv_path.stat().st_size} bytes")
+        st.sidebar.info(f"GeoJSON existe: {geojson_path.exists()}, Tamanho: {geojson_path.stat().st_size} bytes")
+        
+        # Lê os primeiros bytes do GeoJSON para debug
+        if geojson_path.exists():
+            with open(geojson_path, 'rb') as f:
+                first_bytes = f.read(100)  # Lê os primeiros 100 bytes
+                st.sidebar.info(f"Primeiros bytes do GeoJSON: {first_bytes}")
         
         # Carrega os dados
         properties = pd.read_csv(csv_path, encoding='utf-8')
         
-        # Método atualizado para ler GeoJSON - compatível com Fiona 1.10.1
-        with open(geojson_path, 'r') as f:
+        # Método robusto para ler GeoJSON
+        with open(geojson_path, 'r', encoding='utf-8') as f:  # Adiciona encoding explícito
+            first_char = f.read(1)  # Lê apenas o primeiro caractere
+            f.seek(0)  # Volta para o início do arquivo
+            
+            if first_char != '{':
+                st.error(f"❌ GeoJSON não começa com '{{'! Primeiro caractere: '{first_char}'")
+                return None, None
+                
             geojson_data = json.load(f)
+        
         geodata = gpd.GeoDataFrame.from_features(geojson_data["features"])
         
         # Normaliza os nomes dos distritos no geodata
@@ -128,6 +142,9 @@ def load_data():
         
     except FileNotFoundError as e:
         st.error(f"Arquivo não encontrado: {e}. Verifique se os dados estão no GitHub.")
+        return None, None
+    except json.JSONDecodeError as e:
+        st.error(f"Erro ao decodificar JSON: {e}. O arquivo GeoJSON pode estar corrompido ou vazio.")
         return None, None
     except Exception as e:
         st.error(f"Erro inesperado ao carregar dados: {e}")
