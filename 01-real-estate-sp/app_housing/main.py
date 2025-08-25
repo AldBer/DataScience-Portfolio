@@ -160,6 +160,17 @@ if df is None or geo_df is None:
 district_mapping = create_district_mapping()
 df = apply_district_mapping(df, district_mapping)
 
+# Logo após aplicar o mapeamento, adicione:
+st.sidebar.subheader("🔍 Debug de Mapeamento")
+
+# Mostra quais bairros não foram mapeados
+unmapped_bairros = df[~df['distrito_oficial'].isin(geo_df['ds_nome_normalized'])]['bairro'].unique()
+st.sidebar.write("Bairros não mapeados:", unmapped_bairros[:10])  # Mostra os 10 primeiros
+
+# Mostra a contagem de imóveis por distrito oficial
+distrito_count = df['distrito_oficial'].value_counts()
+st.sidebar.write("Imóveis por distrito:", distrito_count.head(10))
+
 # Debug das conversões
 with st.expander("🔍 Debug: Mapeamento de Distritos"):
     st.subheader("Conversões Aplicadas:")
