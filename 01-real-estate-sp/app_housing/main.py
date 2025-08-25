@@ -109,13 +109,15 @@ def load_data():
         csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
         geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
         
-        # Debug: Mostra os caminhos que está tentando usar (útil para deployment)
+        # Debug: Mostra os caminhos que está tentando usar
         st.sidebar.info(f"CSV Path: {csv_path}")
         st.sidebar.info(f"GeoJSON Path: {geojson_path}")
         
         # Carrega os dados
-        properties = pd.read_csv(csv_path, encoding='utf-8')  # Tente 'latin-1' se der erro
-        geodata = gpd.read_file(geojson_path)
+        properties = pd.read_csv(csv_path, encoding='utf-8')
+        
+        # Método atualizado para ler GeoJSON - compatível com Fiona 1.10.1
+        geodata = gpd.read_file(str(geojson_path))  # Converte Path para string
         
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
