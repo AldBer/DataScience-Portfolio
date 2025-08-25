@@ -6,6 +6,11 @@ import geopandas as gpd
 import json
 import unicodedata
 import re
+from pathlib import Path
+current_script_path = Path(__file__).parent
+data_file_path = current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv"
+data_file_path_resolved = data_file_path.resolve()
+df = pd.read_csv(data_file_path_resolved)
 
 # Configuração inicial
 st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
