@@ -101,8 +101,8 @@ def apply_district_mapping(df, mapping):
 def load_data():
     """Carrega dados de propriedades e geodados"""
     try:
-        properties = pd.read_csv (r"data/raw/sp_properties_sample.csv")
-        geodata = gpd.read_file(r"data/processed/sp_distritos_processado.geojson")
+        properties = pd.read_csv (r"../data/raw/sp_properties_sample.csv")
+        geodata = gpd.read_file(r"../data/processed/sp_distritos_processado.geojson")
         
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
