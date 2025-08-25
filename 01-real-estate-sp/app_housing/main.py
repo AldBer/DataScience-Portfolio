@@ -7,10 +7,6 @@ import json
 import unicodedata
 import re
 from pathlib import Path
-current_script_path = Path(__file__).parent
-data_file_path = current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv"
-data_file_path_resolved = data_file_path.resolve()
-df = pd.read_csv(data_file_path_resolved)
 
 # Configuração inicial
 st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
@@ -104,10 +100,18 @@ def apply_district_mapping(df, mapping):
 # Carregar dados
 @st.cache_data
 def load_data():
-    """Carrega dados de propriedades e geodados"""
+    """Carrega dados de propriedades e geodados usando caminhos relativos robustos"""
     try:
-        properties = pd.read_csv (r"../data/raw/sp_properties_sample.csv")
-        geodata = gpd.read_file(r"../data/processed/sp_distritos_processado.geojson")
+        # Obtém o caminho base do script
+        current_script_path = Path(__file__).parent
+        
+        # Constrói os caminhos para os arquivos
+        csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
+        geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
+        
+        # Carrega os dados
+        properties = pd.read_csv(csv_path)
+        geodata = gpd.read_file(geojson_path)
         
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
