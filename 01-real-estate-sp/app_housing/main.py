@@ -109,16 +109,24 @@ def load_data():
         csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
         geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
         
+        # Debug: Mostra os caminhos que está tentando usar (útil para deployment)
+        st.sidebar.info(f"CSV Path: {csv_path}")
+        st.sidebar.info(f"GeoJSON Path: {geojson_path}")
+        
         # Carrega os dados
-        properties = pd.read_csv(csv_path)
+        properties = pd.read_csv(csv_path, encoding='utf-8')  # Tente 'latin-1' se der erro
         geodata = gpd.read_file(geojson_path)
         
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
         
         return properties, geodata
+        
+    except FileNotFoundError as e:
+        st.error(f"Arquivo não encontrado: {e}. Verifique se os dados estão no GitHub.")
+        return None, None
     except Exception as e:
-        st.error(f"Erro ao carregar dados: {e}")
+        st.error(f"Erro inesperado ao carregar dados: {e}")
         return None, None
 
 # Carregar dados
