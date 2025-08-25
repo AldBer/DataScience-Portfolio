@@ -109,16 +109,6 @@ def load_data():
         csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
         geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
         
-        # Debug: Verifica se os arquivos existem e mostram o tamanho
-        st.sidebar.info(f"CSV existe: {csv_path.exists()}, Tamanho: {csv_path.stat().st_size} bytes")
-        st.sidebar.info(f"GeoJSON existe: {geojson_path.exists()}, Tamanho: {geojson_path.stat().st_size} bytes")
-        
-        # Lê os primeiros bytes do GeoJSON para debug
-        if geojson_path.exists():
-            with open(geojson_path, 'rb') as f:
-                first_bytes = f.read(100)  # Lê os primeiros 100 bytes
-                st.sidebar.info(f"Primeiros bytes do GeoJSON: {first_bytes}")
-        
         # Carrega os dados
         properties = pd.read_csv(csv_path, encoding='utf-8')
         
