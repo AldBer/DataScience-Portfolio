@@ -34,93 +34,34 @@ def normalize_name(name):
     
     return name
 
-def create_district_mapping():
-    """
-    Cria mapeamento manual entre bairros do CSV e distritos do GeoJSON
-    Baseado no conhecimento de São Paulo
-    """
-    mapping = {
-        # Bairros CSV -> Distritos Oficiais GeoJSON
-        'ITAIM BIBI': 'ITAIM BIBI',
-        'JARDINS': 'JARDIM PAULISTA',  # Jardins faz parte do distrito Jardim Paulista
-        'LAPA': 'LAPA',
-        'MOEMA': 'MOEMA', 
-        'MORUMBI': 'VILA ANDRADE',  # Morumbi faz parte de Vila Andrade
-        'VILA MADALENA': 'PINHEIROS',  # Vila Madalena faz parte do distrito Pinheiros
-        'PINHEIROS': 'PINHEIROS',
-        'BROOKLIN': 'BROOKLIN PAULISTA',
-        'CAMPO BELO': 'CAMPO BELO',
-        'VILA OLIMPIA': 'VILA OLIMPIA',
-        'CHACARA SANTO ANTONIO': 'CHACARA SANTO ANTONIO',
-        'SANTANA': 'SANTANA',
-        'TATUAPE': 'TATUAPE',
-        'PENHA': 'PENHA',
-        'IPIRANGA': 'IPIRANGA',
-        'SAUDE': 'SAUDE',
-        'LIBERDADE': 'LIBERDADE',
-        'BELA VISTA': 'BELA VISTA',
-        'CONSOLACAO': 'CONSOLACAO',
-        'HIGIENOPOLIS': 'SANTA CECILIA',  # Higienópolis faz parte de Santa Cecília
-        'PACAEMBU': 'PERDIZES',  # Pacaembu faz parte de Perdizes
-        'VILA NOVA CONCEICAO': 'MOEMA',  # Vila Nova Conceição faz parte de Moema
-        'CAMPO GRANDE': 'CAMPO GRANDE',
-        'SANTO AMARO': 'SANTO AMARO',
-        'JARDIM EUROPA': 'JARDIM PAULISTA',
-        'JARDIM AMERICA': 'JARDIM PAULISTA',
-        'CIDADE JARDIM': 'PINHEIROS',
-        'BUTANTA': 'BUTANTA',
-        'VILA LEOPOLDINA': 'VILA LEOPOLDINA',
-        'AGUA BRANCA': 'BARRA FUNDA',  # Água Branca faz parte de Barra Funda
-        'PERDIZES': 'PERDIZES',
-        'SUMARE': 'SUMARE',
-        'VILA POMPEIA': 'POMPEIA',
-        'POMPEIA': 'POMPEIA'
-    }
-    
-    return mapping
-
-def apply_district_mapping(df, mapping):
-    """
-    Aplica o mapeamento de bairros para distritos oficiais
-    """
-    df = df.copy()
-    
-    # Normaliza os nomes dos bairros
-    df['bairro_normalized'] = df['bairro'].apply(normalize_name)
-    
-    # Aplica o mapeamento
-    df['distrito_oficial'] = df['bairro_normalized'].map(mapping)
-    
-    # Para bairros não mapeados, tenta usar o nome original normalizado
-    mask_not_mapped = df['distrito_oficial'].isna()
-    df.loc[mask_not_mapped, 'distrito_oficial'] = df.loc[mask_not_mapped, 'bairro_normalized']
-    
-    return df
-
-# Carregar dados
 @st.cache_data
-def load_data():
-    """Carrega dados de propriedades e geodados usando caminhos relativos robustos"""
+def load_precos_data():
+    """Carrega os dados processados do JSON"""
     try:
-        # Obtém o caminho base do script
-        current_script_path = Path(__file__).parent
+        # Caminho para o JSON gerado pelo pipeline
+        json_path = Path(__file__).parent / "precos_por_distrito.json"
         
-        # Constrói os caminhos para os arquivos
-        csv_path = (current_script_path / ".." / "data" / "raw" / "sp_properties_sample.csv").resolve()
-        geojson_path = (current_script_path / ".." / "data" / "processed" / "sp_distritos_processado.geojson").resolve()
+        with open(json_path, 'r', encoding='utf-8') as f:
+            dados = json.load(f)
         
-        # Carrega os dados
-        properties = pd.read_csv(csv_path, encoding='utf-8')
+        return dados
+    except FileNotFoundError:
+        st.error("❌ Arquivo precos_por_distrito.json não encontrado.")
+        st.info("💡 Execute primeiro o script atualizar_precos.py para gerar os dados.")
+        return None
+    except Exception as e:
+        st.error(f"❌ Erro ao carregar dados: {e}")
+        return None
+
+@st.cache_data  
+def load_geojson_data():
+    """Carrega o GeoJSON dos distritos de SP"""
+    try:
+        # Caminho para o GeoJSON - ajuste conforme sua estrutura
+        geojson_path = Path(__file__).parent / "data" / "processed" / "sp_distritos_processado.geojson"
         
         # Método robusto para ler GeoJSON
-        with open(geojson_path, 'r', encoding='utf-8') as f:  # Adiciona encoding explícito
-            first_char = f.read(1)  # Lê apenas o primeiro caractere
-            f.seek(0)  # Volta para o início do arquivo
-            
-            if first_char != '{':
-                st.error(f"❌ GeoJSON não começa com '{{'! Primeiro caractere: '{first_char}'")
-                return None, None
-                
+        with open(geojson_path, 'r', encoding='utf-8') as f:
             geojson_data = json.load(f)
         
         geodata = gpd.GeoDataFrame.from_features(geojson_data["features"])
@@ -128,279 +69,235 @@ def load_data():
         # Normaliza os nomes dos distritos no geodata
         geodata['ds_nome_normalized'] = geodata['ds_nome'].apply(normalize_name)
         
-        return properties, geodata
+        return geodata
         
-    except FileNotFoundError as e:
-        st.error(f"Arquivo não encontrado: {e}. Verifique se os dados estão no GitHub.")
-        return None, None
-    except json.JSONDecodeError as e:
-        st.error(f"Erro ao decodificar JSON: {e}. O arquivo GeoJSON pode estar corrompido ou vazio.")
-        return None, None
+    except FileNotFoundError:
+        st.error("❌ Arquivo GeoJSON não encontrado.")
+        return None
     except Exception as e:
-        st.error(f"Erro inesperado ao carregar dados: {e}")
-        return None, None
+        st.error(f"❌ Erro ao carregar GeoJSON: {e}")
+        return None
 
 # Carregar dados
-df, geo_df = load_data()
+dados_precos = load_precos_data()
+geo_df = load_geojson_data()
 
-if df is None or geo_df is None:
+if dados_precos is None or geo_df is None:
     st.stop()
 
-# Aplicar mapeamento de distritos
-district_mapping = create_district_mapping()
-df = apply_district_mapping(df, district_mapping)
+# Converter dados do JSON para DataFrame
+precos_df = pd.DataFrame.from_dict(dados_precos['precos_por_distrito'], orient='index')
+precos_df = precos_df.reset_index().rename(columns={'index': 'distrito'})
 
-# Logo após aplicar o mapeamento, adicione:
-st.sidebar.subheader("🔍 Debug de Mapeamento")
+# Normalizar nomes dos distritos para matching
+precos_df['distrito_normalized'] = precos_df['distrito'].apply(normalize_name)
+geo_df['ds_nome_normalized'] = geo_df['ds_nome'].apply(normalize_name)
 
-# Mostra quais bairros não foram mapeados
-unmapped_bairros = df[~df['distrito_oficial'].isin(geo_df['ds_nome_normalized'])]['bairro'].unique()
-st.sidebar.write("Bairros não mapeados:", unmapped_bairros[:10])  # Mostra os 10 primeiros
+# Fazer merge entre GeoJSON e dados de preços
+geo_merged = geo_df.merge(
+    precos_df,
+    left_on='ds_nome_normalized',
+    right_on='distrito_normalized',
+    how='left'
+)
 
-# Mostra a contagem de imóveis por distrito oficial
-distrito_count = df['distrito_oficial'].value_counts()
-st.sidebar.write("Imóveis por distrito:", distrito_count.head(10))
+# Sidebar com informações
+st.sidebar.header("📊 Informações do Dataset")
+st.sidebar.metric("Total de Distritos", dados_precos['total_distritos'])
+st.sidebar.metric("Imóveis Processados", dados_precos['total_imoveis_processados'])
+st.sidebar.metric("Preço Médio Geral", f"R$ {dados_precos['preco_medio_geral']:.2f}")
 
-# Debug das conversões
-with st.expander("🔍 Debug: Mapeamento de Distritos"):
-    st.subheader("Conversões Aplicadas:")
-    
-    mapping_df = pd.DataFrame([
-        {"Bairro Original": bairro, "Distrito Mapeado": distrito}
-        for bairro, distrito in district_mapping.items()
-    ])
-    st.dataframe(mapping_df, use_container_width=True)
-    
-    # Estatísticas do mapeamento
-    mapped_count = df['distrito_oficial'].isin(geo_df['ds_nome_normalized']).sum()
-    total_count = len(df)
-    
-    st.metric("🎯 Taxa de Mapeamento", f"{mapped_count}/{total_count} ({mapped_count/total_count*100:.1f}%)")
-    
-    # Distritos não encontrados
-    unmapped = df[~df['distrito_oficial'].isin(geo_df['ds_nome_normalized'])]['distrito_oficial'].unique()
-    if len(unmapped) > 0:
-        st.warning(f"⚠️ Distritos não encontrados no GeoJSON: {', '.join(unmapped[:5])}")
-
-# Filtros na sidebar
+# Filtros
 st.sidebar.header("🎛️ Filtros")
 
-# Filtro de bairros (usando os nomes originais)
-bairros = sorted(df['bairro'].unique())
-selected_bairros = st.sidebar.multiselect(
-    "📍 Selecionar Bairros", 
-    bairros, 
-    default=bairros[:5] if len(bairros) > 5 else bairros
+# Filtro de distritos
+distritos_disponiveis = precos_df['distrito'].dropna().unique()
+distritos_selecionados = st.sidebar.multiselect(
+    "📍 Distritos",
+    options=distritos_disponiveis,
+    default=distritos_disponiveis[:5] if len(distritos_disponiveis) > 5 else distritos_disponiveis
 )
 
-# Filtros de preço
-price_range = st.sidebar.slider(
-    "💰 Faixa de Preços (R$)", 
-    int(df['preco'].min()), 
-    int(df['preco'].max()),
-    (int(df['preco'].min()), int(df['preco'].max())),
-    step=10000
-)
-
-# Filtro de quartos
-quartos = sorted(df['quartos'].unique())
-selected_quartos = st.sidebar.multiselect(
-    "🛏️ Número de Quartos", 
-    quartos, 
-    default=quartos
-)
+# Filtro de faixa de preço
+if not precos_df.empty:
+    min_price = precos_df['preco_medio'].min()
+    max_price = precos_df['preco_medio'].max()
+    
+    price_range = st.sidebar.slider(
+        "💰 Faixa de Preço Médio (R$)",
+        min_value=float(min_price),
+        max_value=float(max_price),
+        value=(float(min_price), float(max_price))
+    )
 
 # Aplicar filtros
-filtered_df = df[
-    (df['bairro'].isin(selected_bairros)) &
-    (df['preco'] >= price_range[0]) &
-    (df['preco'] <= price_range[1]) &
-    (df['quartos'].isin(selected_quartos))
+if distritos_selecionados:
+    filtered_geo = geo_merged[geo_merged['distrito'].isin(distritos_selecionados)]
+else:
+    filtered_geo = geo_merged
+
+filtered_geo = filtered_geo[
+    (filtered_geo['preco_medio'] >= price_range[0]) & 
+    (filtered_geo['preco_medio'] <= price_range[1])
 ]
 
-if filtered_df.empty:
-    st.warning("⚠️ Nenhum imóvel encontrado com os filtros selecionados!")
-    st.stop()
-
-# Métricas resumidas
+# Métricas principais
 st.subheader("📊 Métricas Principais")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric(
-        "🏘️ Total de Imóveis", 
-        f"{len(filtered_df):,}",
-        delta=f"{len(filtered_df) - len(df):,} vs total"
-    )
+    st.metric("Distritos com Dados", len(precos_df))
 
 with col2:
-    avg_price = filtered_df['preco'].mean()
-    st.metric(
-        "💰 Preço Médio", 
-        f"R$ {avg_price:,.0f}",
-        delta=f"{((avg_price / df['preco'].mean()) - 1) * 100:+.1f}%"
-    )
+    st.metric("Total de Imóveis", dados_precos['total_imoveis_processados'])
 
 with col3:
-    avg_area = filtered_df['area_m2'].mean()
-    st.metric(
-        "📏 Área Média", 
-        f"{avg_area:.1f}m²",
-        delta=f"{((avg_area / df['area_m2'].mean()) - 1) * 100:+.1f}%"
+    st.metric("Preço Médio Geral", f"R$ {dados_precos['preco_medio_geral']:.2f}")
+
+with col4:
+    st.metric("Última Atualização", pd.to_datetime(dados_precos['ultima_atualizacao']).strftime('%d/%m/%Y'))
+
+# Mapa Coroplético
+st.subheader("🗺️ Mapa de Preços por Distrito")
+
+if not filtered_geo.empty:
+    # Criar mapa coroplético
+    fig = px.choropleth_mapbox(
+        filtered_geo,
+        geojson=filtered_geo.geometry.__geo_interface__,
+        locations=filtered_geo.index,
+        color='preco_medio',
+        hover_name='ds_nome',
+        hover_data={
+            'preco_medio': ':.2f',
+            'quantidade_imoveis': True,
+            'preco_minimo': ':.2f',
+            'preco_maximo': ':.2f'
+        },
+        color_continuous_scale='Viridis',
+        mapbox_style="carto-positron",
+        center={"lat": -23.5505, "lon": -46.6333},
+        zoom=9,
+        opacity=0.7,
+        labels={
+            'preco_medio': 'Preço Médio (R$)',
+            'quantidade_imoveis': 'Qtd. Imóveis',
+            'preco_minimo': 'Preço Mínimo',
+            'preco_maximo': 'Preço Máximo'
+        }
     )
-
-# Preparar dados para o mapa
-st.subheader("🗺️ Distribuição Geográfica de Preços")
-
-try:
-    # Calcular preço médio por distrito oficial (mapeado)
-    price_by_district = filtered_df.groupby('distrito_oficial').agg({
-        'preco': ['mean', 'count'],
-        'area_m2': 'mean',
-        'bairro': lambda x: ', '.join(x.unique()[:3])  # Mostra até 3 bairros por distrito
-    }).round(2)
     
-    # Achatar as colunas multi-level
-    price_by_district.columns = ['preco_medio', 'qtd_imoveis', 'area_media', 'bairros_inclusos']
-    price_by_district = price_by_district.reset_index()
-    
-    # Fazer merge com geodados usando nomes normalizados
-    geo_merged = geo_df.merge(
-        price_by_district,
-        left_on='ds_nome_normalized',  # coluna normalizada do geodata
-        right_on='distrito_oficial',   # coluna mapeada dos dados de preço
-        how='left'
+    fig.update_layout(
+        height=600,
+        margin={"r":0,"t":0,"l":0,"b":0},
+        coloraxis_colorbar=dict(
+            title="Preço Médio (R$)",
+            tickprefix="R$ "
+        )
     )
     
-    # Verificar se o merge funcionou
-    merged_count = geo_merged['preco_medio'].notna().sum()
-    st.success(f"✅ Merge realizado com sucesso: {merged_count}/{len(geo_df)} distritos com dados")
-    
-    if merged_count > 0:
-        # Criar mapa coroplético
-        geo_merged_valid = geo_merged[geo_merged['preco_medio'].notna()].copy()
-        
-        fig_map = px.choropleth_mapbox(
-            geo_merged_valid,
-            geojson=json.loads(geo_merged_valid.to_json()),
-            locations=geo_merged_valid.index,
-            color='preco_medio',
-            hover_name='ds_nome',
-            hover_data={
-                'preco_medio': ':,.0f',
-                'qtd_imoveis': ':,',
-                'area_media': ':.1f',
-                'bairros_inclusos': True
-            },
-            color_continuous_scale='Viridis',
-            mapbox_style="carto-positron",
-            center={"lat": -23.5505, "lon": -46.6333},
-            zoom=9.5,
-            opacity=0.8,
-            labels={
-                'preco_medio': 'Preço Médio (R$)',
-                'qtd_imoveis': 'Qtd Imóveis',
-                'area_media': 'Área Média (m²)',
-                'bairros_inclusos': 'Bairros'
-            }
-        )
-        
-        fig_map.update_layout(
-            height=650,
-            margin={"r":0,"t":30,"l":0,"b":0},
-            coloraxis_colorbar=dict(
-                title="Preço Médio (R$)",
-                tickformat=".0f"
-            )
-        )
-        
-        st.plotly_chart(fig_map, use_container_width=True)
-    else:
-        st.error("❌ Não foi possível criar o mapa. Verifique o mapeamento dos distritos.")
+    st.plotly_chart(fig, use_container_width=True)
+else:
+    st.warning("⚠️ Nenhum dado encontrado com os filtros selecionados.")
 
-except Exception as e:
-    st.error(f"❌ Erro ao criar mapa: {str(e)}")
+# Tabela de dados
+st.subheader("📋 Dados Detalhados por Distrito")
 
-# Visualização 2: Gráfico de Barras (Top 10 Bairros)
-st.subheader("📈 Top 10 Bairros - Preço Médio")
+# Ordenar por preço médio
+precos_df_sorted = precos_df.sort_values('preco_medio', ascending=False)
 
-top_districts = filtered_df.groupby('bairro')['preco'].mean().sort_values(ascending=False).head(10)
+# Formatar valores monetários
+def format_currency(value):
+    return f"R$ {value:,.2f}" if pd.notna(value) else "N/A"
+
+precos_df_display = precos_df_sorted.copy()
+precos_df_display['preco_medio'] = precos_df_display['preco_medio'].apply(format_currency)
+precos_df_display['preco_minimo'] = precos_df_display['preco_minimo'].apply(format_currency)
+precos_df_display['preco_maximo'] = precos_df_display['preco_maximo'].apply(format_currency)
+
+st.dataframe(
+    precos_df_display[
+        ['distrito', 'preco_medio', 'quantidade_imoveis', 'preco_minimo', 'preco_maximo']
+    ].rename(columns={
+        'distrito': 'Distrito',
+        'preco_medio': 'Preço Médio',
+        'quantidade_imoveis': 'Qtd. Imóveis',
+        'preco_minimo': 'Preço Mínimo',
+        'preco_maximo': 'Preço Máximo'
+    }),
+    use_container_width=True,
+    height=400
+)
+
+# Gráfico de barras - Top 10 distritos por preço
+st.subheader("📈 Top 10 Distritos por Preço Médio")
+
+top_10 = precos_df_sorted.head(10)
 
 fig_bar = px.bar(
-    x=top_districts.values,
-    y=top_districts.index,
+    top_10,
+    x='preco_medio',
+    y='distrito',
     orientation='h',
-    labels={'x': 'Preço Médio (R$)', 'y': 'Bairro'},
-    color=top_districts.values,
-    color_continuous_scale='Reds',
-    title="Bairros com Maiores Preços Médios"
+    title="Distritos com Maiores Preços Médios",
+    labels={'preco_medio': 'Preço Médio (R$)', 'distrito': 'Distrito'},
+    color='preco_medio',
+    color_continuous_scale='Viridis'
 )
 
 fig_bar.update_layout(
-    height=450,
+    height=500,
     yaxis={'categoryorder': 'total ascending'},
-    showlegend=False,
-    xaxis_tickformat='.0f'
+    xaxis_tickprefix='R$ '
 )
 
 st.plotly_chart(fig_bar, use_container_width=True)
 
-# Visualização 3: Análise por Número de Quartos
-st.subheader("🛏️ Distribuição de Preços por Quartos")
+# Informações sobre cobertura
+st.subheader("ℹ️ Informações de Cobertura")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    # Box plot por quartos
-    fig_box = px.box(
-        filtered_df, 
-        x='quartos', 
-        y='preco',
-        title="Distribuição de Preços por Número de Quartos",
-        labels={'preco': 'Preço (R$)', 'quartos': 'Número de Quartos'}
+    st.metric(
+        "Taxa de Cobertura", 
+        f"{(dados_precos['total_imoveis_processados'] / 723 * 100):.1f}%",
+        help="Percentual de imóveis que foram mapeados para distritos"
     )
-    fig_box.update_layout(height=400)
-    st.plotly_chart(fig_box, use_container_width=True)
 
 with col2:
-    # Scatter plot área vs preço
-    fig_scatter = px.scatter(
-        filtered_df, 
-        x='area_m2', 
-        y='preco',
-        color='quartos',
-        size='area_m2',
-        hover_data=['bairro'],
-        title="Relação Área vs Preço",
-        labels={'area_m2': 'Área (m²)', 'preco': 'Preço (R$)'}
+    st.metric(
+        "Distritos Mapeados", 
+        f"{dados_precos['total_distritos']}/96",
+        help="Distritos com dados vs total de distritos em SP"
     )
-    fig_scatter.update_layout(height=400)
-    st.plotly_chart(fig_scatter, use_container_width=True)
 
-# Tabela resumo por distrito
-st.subheader("📋 Resumo por Distrito Oficial")
-
-if merged_count > 0:
-    summary_table = filtered_df.groupby(['distrito_oficial', 'bairro']).agg({
-        'preco': ['mean', 'min', 'max', 'count'],
-        'area_m2': 'mean',
-        'quartos': 'mean'
-    }).round(2)
-    
-    # Renomear colunas
-    summary_table.columns = [
-        'Preço Médio', 'Preço Min', 'Preço Max', 
-        'Qtd Imóveis', 'Área Média', 'Quartos Médio'
-    ]
-    
-    summary_table = summary_table.sort_values('Preço Médio', ascending=False).head(20)
-    
-    # Formatar valores monetários
-    for col in ['Preço Médio', 'Preço Min', 'Preço Max']:
-        summary_table[col] = summary_table[col].apply(lambda x: f"R$ {x:,.0f}")
-    
-    st.dataframe(summary_table, use_container_width=True)
-
-# Footer com informações
+# Footer
 st.markdown("---")
-st.markdown("📊 **Dashboard desenvolvido com Streamlit & Plotly** | 🏠 Dados do mercado imobiliário de São Paulo | 🗺️ Mapeamento automático de distritos")
+st.markdown("""
+**📊 Sobre os dados:**
+- Dados processados automaticamente do pipeline
+- Preços calculados com base em imóveis mapeados para distritos
+- Atualizado em: {}
+""".format(pd.to_datetime(dados_precos['ultima_atualizacao']).strftime('%d/%m/%Y %H:%M')))
+
+# Botão para atualizar dados
+if st.button("🔄 Executar Pipeline de Atualização"):
+    with st.spinner("Executando pipeline de atualização..."):
+        try:
+            import subprocess
+            result = subprocess.run(
+                ["python", "atualizar_precos.py"], 
+                capture_output=True, 
+                text=True,
+                cwd=Path(__file__).parent
+            )
+            
+            if result.returncode == 0:
+                st.success("✅ Pipeline executado com sucesso!")
+                st.info("Recarregue a página para ver os dados atualizados.")
+            else:
+                st.error(f"❌ Erro no pipeline: {result.stderr}")
+                
+        except Exception as e:
+            st.error(f"❌ Erro ao executar pipeline: {e}")

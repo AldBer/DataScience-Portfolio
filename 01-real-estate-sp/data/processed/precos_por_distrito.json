@@ -1,0 +1,120 @@
+{
+  "ultima_atualizacao": "2025-09-08T14:06:12.711719",
+  "total_distritos": 19,
+  "precos_por_distrito": {
+    "ALTO DE PINHEIROS": {
+      "preco_medio": 2054.67,
+      "quantidade_imoveis": 3,
+      "preco_minimo": 414.0,
+      "preco_maximo": 5086.0
+    },
+    "ANHANGUERA": {
+      "preco_medio": 2530.67,
+      "quantidade_imoveis": 3,
+      "preco_minimo": 2184.0,
+      "preco_maximo": 2966.0
+    },
+    "ARICANDUVA": {
+      "preco_medio": 2499.5,
+      "quantidade_imoveis": 4,
+      "preco_minimo": 157.0,
+      "preco_maximo": 3569.0
+    },
+    "BARRA FUNDA": {
+      "preco_medio": 4653.0,
+      "quantidade_imoveis": 1,
+      "preco_minimo": 4653.0,
+      "preco_maximo": 4653.0
+    },
+    "BELA VISTA": {
+      "preco_medio": 3805.67,
+      "quantidade_imoveis": 3,
+      "preco_minimo": 707.0,
+      "preco_maximo": 5633.0
+    },
+    "BELÉM": {
+      "preco_medio": 2693.5,
+      "quantidade_imoveis": 4,
+      "preco_minimo": 47.0,
+      "preco_maximo": 4044.0
+    },
+    "BOM RETIRO": {
+      "preco_medio": 3405.0,
+      "quantidade_imoveis": 1,
+      "preco_minimo": 3405.0,
+      "preco_maximo": 3405.0
+    },
+    "BRASILÂNDIA": {
+      "preco_medio": 3621.86,
+      "quantidade_imoveis": 7,
+      "preco_minimo": 217.0,
+      "preco_maximo": 11219.0
+    },
+    "BRÁS": {
+      "preco_medio": 3679.0,
+      "quantidade_imoveis": 1,
+      "preco_minimo": 3679.0,
+      "preco_maximo": 3679.0
+    },
+    "CACHOEIRINHA": {
+      "preco_medio": 2804.75,
+      "quantidade_imoveis": 8,
+      "preco_minimo": 1699.0,
+      "preco_maximo": 3269.0
+    },
+    "CAMBUCI": {
+      "preco_medio": 4051.0,
+      "quantidade_imoveis": 1,
+      "preco_minimo": 4051.0,
+      "preco_maximo": 4051.0
+    },
+    "CIDADE ADEMAR": {
+      "preco_medio": 2340.45,
+      "quantidade_imoveis": 11,
+      "preco_minimo": 224.0,
+      "preco_maximo": 4006.0
+    },
+    "ITAQUERA": {
+      "preco_medio": 2873.0,
+      "quantidade_imoveis": 12,
+      "preco_minimo": 1928.0,
+      "preco_maximo": 3714.0
+    },
+    "JARDIM ÂNGELA": {
+      "preco_medio": 2085.56,
+      "quantidade_imoveis": 9,
+      "preco_minimo": 317.0,
+      "preco_maximo": 5013.0
+    },
+    "LAPA": {
+      "preco_medio": 4818.29,
+      "quantidade_imoveis": 7,
+      "preco_minimo": 4018.0,
+      "preco_maximo": 5583.0
+    },
+    "SÃO MATEUS": {
+      "preco_medio": 3125.4,
+      "quantidade_imoveis": 5,
+      "preco_minimo": 282.0,
+      "preco_maximo": 6414.0
+    },
+    "VILA GUILHERME": {
+      "preco_medio": 2903.4,
+      "quantidade_imoveis": 5,
+      "preco_minimo": 349.0,
+      "preco_maximo": 3861.0
+    },
+    "VILA MARIANA": {
+      "preco_medio": 5058.67,
+      "quantidade_imoveis": 3,
+      "preco_minimo": 4865.0,
+      "preco_maximo": 5423.0
+    },
+    "ÁGUA RASA": {
+      "preco_medio": 3474.82,
+      "quantidade_imoveis": 11,
+      "preco_minimo": 407.0,
+      "preco_maximo": 4564.0
+    }
+  }
+}
