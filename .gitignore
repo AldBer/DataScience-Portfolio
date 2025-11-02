@@ -10,6 +10,10 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 venv/
+.env/
+*.egg-info/
+dist/
+build/
 
 # ==== Dados Temporários ====
 *.tmp
@@ -25,6 +29,7 @@ desktop.ini
 .vscode/
 .idea/
 *.swp
+*.sublime-*
 
 # ==== Pastas Geradas ====
 _site/
@@ -36,11 +41,45 @@ vendor/
 # ==== Notebooks ====
 .ipynb_checkpoints/
 
-# ==== Dados Ignorados (com exceções) ====
+# ==== DADOS BRUTOS - NÃO SUBIR ====
+# Arquivos de dados grandes/brutos
+*.xlsx
+*.xls
+*.csv
 *.parquet
 *.db
-!*.geojson  # Mantém arquivos geoespaciais processados
+*.sqlite
+*.pkl
+*.pickle
+*.feather
 
-# Exceções para dados específicos
+# ==== EXCEÇÕES - Dados Processados PODE SUBIR ====
+# Dados processados/finais pequenos
+!*.geojson  # Mantém arquivos geoespaciais processados
+!01-real-estate-sp/data/processed/*.csv
+!01-real-estate-sp/data/processed/*.json
+!03-sql-projects/**/bairros_info.csv
+!03-sql-projects/**/resultados_finais/*.csv
+
+# Exceções específicas que você já tem
 !dashboards/01_SP_Housing/data/processed/*.geojson
 !dashboards/02_Crypto_Analysis/data/*.csv
+
+# ==== LOGS E TEMPORÁRIOS ====
+logs/
+*.log
+temp/
+tmp/
+
+# ==== STREAMLIT ====
+.streamlit/secrets.toml
+
+# ==== JUPYTER ====
+.jupyter/
+*.ipynb_checkpoints/
+
+# ==== MACHINE LEARNING ====
+models/  # modelos treinados são grandes
+*.h5
+*.model
+*.joblib
