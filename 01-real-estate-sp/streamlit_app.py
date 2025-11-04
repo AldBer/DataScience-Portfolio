@@ -188,6 +188,24 @@ with col2:
         help="Distritos com dados vs total de distritos em SP"
     )
 
+# Opcional: Mapa com Plotly (mais simples)
+if not filtered_df.empty:
+    # Criar mapa básico com coordenadas aproximadas
+    fig_map = px.scatter_mapbox(
+        filtered_df,
+        lat=[-23.5] * len(filtered_df),  # Coordenadas aproximadas
+        lon=[-46.6] * len(filtered_df),
+        size='preco_medio',
+        color='preco_medio',
+        hover_name='distrito',
+        hover_data={'preco_medio': ':.2f', 'quantidade_imoveis': True},
+        size_max=15,
+        zoom=10,
+        height=400
+    )
+    fig_map.update_layout(mapbox_style="open-street-map")
+    st.plotly_chart(fig_map, use_container_width=True)
+    
 # Footer
 st.markdown("---")
 st.markdown(f"""
