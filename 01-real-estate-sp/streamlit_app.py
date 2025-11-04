@@ -1,25 +1,43 @@
-# 01-real-estate-sp/streamlit_app.py
+st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
+
+# Agora importe tudo
 import streamlit as st
 import pandas as pd
-import geopandas as gpd
 import plotly.express as px
+import geopandas as gpd
 import json
 import os
 from pathlib import Path
 
+# Título
+st.title("🏠 Dashboard de Imóveis em São Paulo")
+
+# Função de normalização
+def normalize_name(name):
+    if pd.isna(name):
+        return ""
+    return (
+        str(name)
+        .lower()
+        .strip()
+        .replace('á', 'a').replace('à', 'a').replace('â', 'a').replace('ã', 'a')
+        .replace('é', 'e').replace('ê', 'e')
+        .replace('í', 'i')
+        .replace('ó', 'o').replace('ô', 'o').replace('õ', 'o')
+        .replace('ú', 'u')
+        .replace('ç', 'c')
+        .replace('-', ' ')
+        .replace('  ', ' ')
+    )
+
+# 🔥 CORREÇÃO: Agora sim carregue os dados
 st.write("📁 Estrutura de arquivos:")
 for root, dirs, files in os.walk("."):
     for file in files:
         if file.endswith(('.json', '.geojson')):
             st.write(f"Encontrado: {os.path.join(root, file)}")
 
-# Configuração inicial
-st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
-
-# Título
-st.title("🏠 Dashboard de Imóveis em São Paulo")
-
-# 🔥 CORREÇÃO PARA STREAMLIT CLOUD
+# O resto do seu código original continua...
 def load_data_streamlit():
     """Carrega dados adaptado para Streamlit Cloud"""
     try:
@@ -27,7 +45,8 @@ def load_data_streamlit():
         possible_paths = [
             "data/processed/precos_por_distrito.json",
             "../data/processed/precos_por_distrito.json",
-            "precos_por_distrito.json"
+            "precos_por_distrito.json",
+            "./01-real-estate-sp/data/processed/precos_por_distrito.json"  # 🔥 NOVO CAMINHO
         ]
         
         for json_path in possible_paths:
