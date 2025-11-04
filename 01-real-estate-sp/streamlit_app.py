@@ -1,8 +1,8 @@
 # 01-real-estate-sp/streamlit_app.py
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import geopandas as gpd
+import plotly.express as px
 import json
 import os
 from pathlib import Path
