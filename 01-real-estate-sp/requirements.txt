@@ -1,19 +1,4 @@
-# Core Data Science
-numpy==1.26.4
-pandas==2.1.4
-matplotlib==3.7.2
-seaborn==0.12.2
-
-# Web Framework
 streamlit==1.28.0
-
-# Visualização
-plotly==5.17.0
-
-# Geospatial
-geopandas==0.14.0
-shapely==2.0.1
-
-# Utilities
-requests==2.31.0
-python-dotenv==1.0.0
+pandas==1.5.3
+numpy==1.23.5
+plotly==5.13.0
