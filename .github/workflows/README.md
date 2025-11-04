@@ -35,10 +35,6 @@ workflows/
 - **Trigger**: Diário às 3AM UTC
 - **Outputs**: Novos dados no diretório `02_Crypto_Analysis/data/`
 
-### deploy/streamlit.yml
-- **Propósito**: Faz deploy das aplicações Streamlit
-- **Trigger**: Push para branch main que altere arquivos em `streams/`
-
 ### schedules/nightly_build.yml
 - **Propósito**: Executa testes e validações noturnas
 - **Trigger**: Diário à 1AM UTC

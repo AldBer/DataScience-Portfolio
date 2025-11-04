@@ -2,6 +2,8 @@
 
 ![CI/CD](https://github.com/AldBer/DataScience-Portfolio/actions/workflows/deploy.yml/badge.svg)
 ![Tests](https://github.com/AldBer/DataScience-Portfolio/actions/workflows/tests.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.28%2B-FF4B4B)
 
 Bem-vindo ao meu portfólio de projetos em Ciência de Dados! Este repositório contém uma coleção de projetos que demonstram minhas habilidades em análise de dados, machine learning e visualização.
 
