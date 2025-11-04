@@ -1,6 +1,6 @@
-st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
+# 01-real-estate-sp/streamlit_app.py
 
-# Agora importe tudo
+# ✅ PRIMEIRO: Importar bibliotecas
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -9,7 +9,10 @@ import json
 import os
 from pathlib import Path
 
-# Título
+# ✅ SEGUNDO: Configuração da página (agora st está definido)
+st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
+
+# ✅ TERCEIRO: Resto do código
 st.title("🏠 Dashboard de Imóveis em São Paulo")
 
 # Função de normalização
@@ -30,23 +33,15 @@ def normalize_name(name):
         .replace('  ', ' ')
     )
 
-# 🔥 CORREÇÃO: Agora sim carregue os dados
-st.write("📁 Estrutura de arquivos:")
-for root, dirs, files in os.walk("."):
-    for file in files:
-        if file.endswith(('.json', '.geojson')):
-            st.write(f"Encontrado: {os.path.join(root, file)}")
-
-# O resto do seu código original continua...
+# Funções de carregamento de dados
 def load_data_streamlit():
     """Carrega dados adaptado para Streamlit Cloud"""
     try:
-        # Tenta diferentes caminhos possíveis
         possible_paths = [
-            "data/processed/precos_por_distrito.json",
+            "./01-real-estate-sp/data/processed/precos_por_distrito.json",
+            "data/processed/precos_por_distrito.json", 
             "../data/processed/precos_por_distrito.json",
-            "precos_por_distrito.json",
-            "./01-real-estate-sp/data/processed/precos_por_distrito.json"  # 🔥 NOVO CAMINHO
+            "precos_por_distrito.json"
         ]
         
         for json_path in possible_paths:
@@ -67,8 +62,9 @@ def load_geojson_streamlit():
     """Carrega GeoJSON adaptado para Streamlit Cloud"""
     try:
         possible_paths = [
+            "./01-real-estate-sp/data/processed/sp_distritos_processado.geojson",
             "data/processed/sp_distritos_processado.geojson",
-            "../data/processed/sp_distritos_processado.geojson", 
+            "../data/processed/sp_distritos_processado.geojson",
             "sp_distritos_processado.geojson"
         ]
         
@@ -89,10 +85,19 @@ def load_geojson_streamlit():
         return None
 
 # Carregar dados
+st.info("🔄 Carregando dados...")
 dados_precos = load_data_streamlit()
 geo_df = load_geojson_streamlit()
 
 if dados_precos is None or geo_df is None:
+    st.error("❌ Falha ao carregar dados. Verificando estrutura de arquivos...")
+    
+    # Debug: mostrar estrutura
+    st.write("📁 Estrutura de arquivos encontrada:")
+    for root, dirs, files in os.walk("."):
+        for file in files:
+            if file.endswith(('.json', '.geojson')):
+                st.write(f"📄 {os.path.join(root, file)}")
     st.stop()
 
 # Converter dados do JSON para DataFrame
