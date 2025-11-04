@@ -7,6 +7,12 @@ import json
 import os
 from pathlib import Path
 
+st.write("📁 Estrutura de arquivos:")
+for root, dirs, files in os.walk("."):
+    for file in files:
+        if file.endswith(('.json', '.geojson')):
+            st.write(f"Encontrado: {os.path.join(root, file)}")
+
 # Configuração inicial
 st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
 
