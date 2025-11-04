@@ -1,6 +1,5 @@
 # 01-real-estate-sp/streamlit_app.py
 
-# ✅ PRIMEIRO: Importar bibliotecas
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -9,10 +8,8 @@ import json
 import os
 from pathlib import Path
 
-# ✅ SEGUNDO: Configuração da página (agora st está definido)
 st.set_page_config(layout="wide", page_title="Dashboard Imóveis SP")
 
-# ✅ TERCEIRO: Resto do código
 st.title("🏠 Dashboard de Imóveis em São Paulo")
 
 # Função de normalização
@@ -33,26 +30,24 @@ def normalize_name(name):
         .replace('  ', ' ')
     )
 
-# Funções de carregamento de dados
 def load_data_streamlit():
     """Carrega dados adaptado para Streamlit Cloud"""
     try:
-        possible_paths = [
-            "./01-real-estate-sp/data/processed/precos_por_distrito.json",
-            "data/processed/precos_por_distrito.json", 
-            "../data/processed/precos_por_distrito.json",
-            "precos_por_distrito.json"
-        ]
+        json_path = "./01-real-estate-sp/data/processed/precos_por_distrito.json"
         
-        for json_path in possible_paths:
-            if os.path.exists(json_path):
-                with open(json_path, 'r', encoding='utf-8') as f:
-                    dados = json.load(f)
-                st.success(f"✅ Dados carregados de: {json_path}")
-                return dados
-        
-        st.error("❌ Não foi possível encontrar o arquivo de dados")
-        return None
+        if os.path.exists(json_path):
+            with open(json_path, 'r', encoding='utf-8') as f:
+                dados = json.load(f)
+            st.success(f"✅ Dados carregados de: {json_path}")
+            
+            # 🔍 DEBUG: Mostrar estrutura dos dados
+            st.write("🔍 Estrutura dos dados carregados:")
+            st.json(dados)  # Mostra o JSON completo
+            
+            return dados
+        else:
+            st.error(f"❌ Arquivo não encontrado: {json_path}")
+            return None
         
     except Exception as e:
         st.error(f"❌ Erro ao carregar dados: {e}")
@@ -61,24 +56,20 @@ def load_data_streamlit():
 def load_geojson_streamlit():
     """Carrega GeoJSON adaptado para Streamlit Cloud"""
     try:
-        possible_paths = [
-            "./01-real-estate-sp/data/processed/sp_distritos_processado.geojson",
-            "data/processed/sp_distritos_processado.geojson",
-            "../data/processed/sp_distritos_processado.geojson",
-            "sp_distritos_processado.geojson"
-        ]
+        geojson_path = "./01-real-estate-sp/data/processed/sp_distritos_processado.geojson"
         
-        for geojson_path in possible_paths:
-            if os.path.exists(geojson_path):
-                with open(geojson_path, 'r', encoding='utf-8') as f:
-                    geojson_data = json.load(f)
-                
-                geodata = gpd.GeoDataFrame.from_features(geojson_data["features"])
-                st.success(f"✅ GeoJSON carregado de: {geojson_path}")
-                return geodata
-        
-        st.error("❌ Não foi possível encontrar o arquivo GeoJSON")
-        return None
+        if os.path.exists(geojson_path):
+            geodata = gpd.read_file(geojson_path)
+            st.success(f"✅ GeoJSON carregado de: {geojson_path}")
+            
+            # 🔍 DEBUG: Mostrar estrutura do GeoJSON
+            st.write("🔍 Primeiras linhas do GeoJSON:")
+            st.write(geodata.head())
+            
+            return geodata
+        else:
+            st.error(f"❌ Arquivo não encontrado: {geojson_path}")
+            return None
         
     except Exception as e:
         st.error(f"❌ Erro ao carregar GeoJSON: {e}")
@@ -89,20 +80,62 @@ st.info("🔄 Carregando dados...")
 dados_precos = load_data_streamlit()
 geo_df = load_geojson_streamlit()
 
+# ⚠️ VERIFICAÇÃO SEGURA DOS DADOS
 if dados_precos is None or geo_df is None:
-    st.error("❌ Falha ao carregar dados. Verificando estrutura de arquivos...")
-    
-    # Debug: mostrar estrutura
-    st.write("📁 Estrutura de arquivos encontrada:")
-    for root, dirs, files in os.walk("."):
-        for file in files:
-            if file.endswith(('.json', '.geojson')):
-                st.write(f"📄 {os.path.join(root, file)}")
+    st.error("❌ Falha ao carregar dados necessários")
     st.stop()
 
-# Converter dados do JSON para DataFrame
-precos_df = pd.DataFrame.from_dict(dados_precos['precos_por_distrito'], orient='index')
-precos_df = precos_df.reset_index().rename(columns={'index': 'distrito'})
+# 🔍 VERIFICAR ESTRUTURA ANTES DE USAR
+st.subheader("🔍 Verificação da Estrutura de Dados")
+
+# Verificar se as chaves esperadas existem
+chaves_esperadas = ['total_imoveis_processados', 'total_distritos', 'preco_medio_geral', 'precos_por_distrito']
+chaves_encontradas = list(dados_precos.keys())
+
+st.write(f"Chaves esperadas: {chaves_esperadas}")
+st.write(f"Chaves encontradas: {chaves_encontradas}")
+
+# Verificar cada chave individualmente
+for chave in chaves_esperadas:
+    if chave in dados_precos:
+        st.success(f"✅ '{chave}': {dados_precos[chave]}")
+    else:
+        st.error(f"❌ Chave '{chave}' não encontrada")
+
+# ⚠️ SÓ CONTINUA SE AS CHAVES PRINCIPAIS EXISTIREM
+if 'precos_por_distrito' not in dados_precos:
+    st.error("❌ Chave 'precos_por_distrito' não encontrada. Estrutura do JSON diferente do esperado.")
+    st.stop()
+
+# Sidebar com verificações seguras
+st.sidebar.header("📊 Informações do Dataset")
+
+# ✅ USAR .get() PARA EVITAR KeyError
+st.sidebar.metric(
+    "Total de Distritos", 
+    dados_precos.get('total_distritos', 'N/A')
+)
+st.sidebar.metric(
+    "Imóveis Processados", 
+    dados_precos.get('total_imoveis_processados', 'N/A')
+)
+st.sidebar.metric(
+    "Preço Médio Geral", 
+    f"R$ {dados_precos.get('preco_medio_geral', 0):.2f}"
+)
+
+# Resto do código com verificações seguras...
+try:
+    # Converter dados do JSON para DataFrame
+    precos_df = pd.DataFrame.from_dict(dados_precos['precos_por_distrito'], orient='index')
+    precos_df = precos_df.reset_index().rename(columns={'index': 'distrito'})
+    
+    st.success("✅ Dados convertidos para DataFrame")
+    st.dataframe(precos_df)
+    
+except Exception as e:
+    st.error(f"❌ Erro ao converter dados: {e}")
+    st.stop()
 
 # Normalizar nomes dos distritos para matching
 precos_df['distrito_normalized'] = precos_df['distrito'].apply(normalize_name)
