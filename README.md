@@ -81,7 +81,7 @@ graph TB
     style E fill:#fce4ec
     style F fill:#e0f2f1
     style G fill:#fff8e1
-
+````
 ## 📊 GitHub Analytics
 
 ![AldBer's GitHub stats](https://github-readme-stats.vercel.app/api?username=AldBer&show_icons=true&theme=radical)
