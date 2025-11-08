@@ -66,13 +66,11 @@
 ## 🎓 Journey de Aprendizado
 
 ```mermaid
-graph LR
+graph TB
     A([🎯 Business Analysis]) --> B([🐍 Python & SQL])
     B --> C([📊 Data Science])
     C --> D([🔐 Cybersecurity])
-direction_tb
     D --> E([☁️ Cloud AWS])
-direction_rl
     E --> F([🤖 ML Engineering])
     F --> G([⚡ DevSecOps])
     
