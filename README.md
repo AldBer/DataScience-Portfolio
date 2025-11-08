@@ -70,7 +70,9 @@ graph LR
     A([🎯 Business Analysis]) --> B([🐍 Python & SQL])
     B --> C([📊 Data Science])
     C --> D([🔐 Cybersecurity])
+graph TB
     D --> E([☁️ Cloud AWS])
+graph RL
     E --> F([🤖 ML Engineering])
     F --> G([⚡ DevSecOps])
     
