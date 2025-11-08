@@ -66,13 +66,15 @@
 ## 🎓 Journey de Aprendizado
 
 ```mermaid
+graph LR
+    A([🎯 Business Analysis]) --> B([🐍 Python & SQL])
+    B --> C([📊 Data Science])
+    C --> D([🔐 Cybersecurity])
 graph TB
-    A[🎯 Business Analysis] --> B[🐍 Python & SQL]
-    B --> C[📊 Data Science]
-    C --> D[🔐 Cybersecurity]
-    D --> E[☁️ Cloud AWS]
-    E --> F[🤖 ML Engineering]
-    F --> G[⚡ DevSecOps]
+    D --> E([☁️ Cloud AWS])
+graph RL
+    E --> F([🤖 ML Engineering])
+    F --> G([⚡ DevSecOps])
     
     style A fill:#e1f5fe
     style B fill:#f3e5f5
@@ -92,4 +94,9 @@ graph TB
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/aldo-bernardi)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/AldBer)
-[![Gmail](https://img.shields.io/badge/Gmail-Follow-White?style=for-the-badge&logo=gmail)](mailto:aldo.bernardi@gmail.com)
+[![Email](https://img.shields.io/badge/Email-Contact%20Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aldo.bernardi@exemplo.com)
+[![Credly](https://img.shields.io/badge/Credly-View%20Badges-FF6B00?style=for-the-badge&logo=credly&logoColor=white)](https://www.credly.com/users/aldo-bernardi.5b9ee3e3/badges)
+
+## 🏆 Certifications
+
+[![Credly Profile](https://img.shields.io/badge/Credly-View%20All%20Badges-FF6B00?style=for-the-badge&logo=credly&logoColor=white)](https://www.credly.com/users/aldo-bernardi.5b9ee3e3/badges)
