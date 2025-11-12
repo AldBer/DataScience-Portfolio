@@ -1,6 +1,6 @@
 📊 Dashboard de Performance de Vendas
 
-![Dashboard Preview](assets/dashboard-preview.png)
+![Dashboard Preview](assests/dash_01.png)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Dash](https://img.shields.io/badge/Dash-2.14.1-blue)
 ![Plotly](https://img.shields.io/badge/Plotly-5.17.0-orange)
@@ -25,6 +25,7 @@ Plotly==5.17.0         # Visualizações interativas
 Pandas==2.1.4          # Manipulação de dados
 Dash-Bootstrap-Components==1.5.0  # UI profissional
 NumPy==1.26.0          # Cálculos numéricos
+```
 
 📥 Instalação e Execução
 Pré-requisitos
@@ -33,24 +34,30 @@ Python 3.8 ou superior
 Git instalado
 
 1. Clonar o Repositório
-bash
+```bash
 git clone https://github.com/AldBer/DataScience-Portfolio.git
 cd DataScience-Portfolio/03-dashboards
+```
 2. Configurar Ambiente Virtual
-bash
+```bash
 # Criar ambiente (opcional mas recomendado)
 python -m venv dash_env
 source dash_env/bin/activate  # Linux/Mac
 # ou
 dash_env\Scripts\activate     # Windows
+```
 3. Instalar Dependências
-bash
+```bash
 pip install -r requirements.txt
+```
 4. Executar a Aplicação
-bash
+```bash
 python app.py
+```
 5. Acessar o Dashboard
+
 Abra seu navegador e acesse: http://127.0.0.1:8050
+
 
 🎮 Como Usar
 Filtros Interativos
