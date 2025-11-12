@@ -139,8 +139,8 @@ Contribuições são bem-vindas! Areas de melhoria:
 
 ## 📞 **Contato**
 
-**Aldo Bernardes**  
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://linkedin.com/in/aldo-bernardes)  
+**Aldo Bernardi**  
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-blue)](https://linkedin.com/in/aldo-bernardi)  
 [![GitHub](https://img.shields.io/badge/GitHub-Profile-black)](https://github.com/AldBer)
 
 ---

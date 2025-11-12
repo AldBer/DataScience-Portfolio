@@ -1,0 +1,50 @@
+/* assets/style.css */
+.card-value {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.text-positive { 
+    color: #28a745; 
+}
+
+.text-negative { 
+    color: #dc3545; 
+}
+
+/* ========== DARK MODE ========== */
+.dark-mode {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    min-height: 100vh;
+}
+
+.dark-mode .card {
+    background-color: #2d3748 !important;
+    color: #ffffff !important;
+    border: 1px solid #4a5568 !important;
+}
+
+.dark-mode .navbar {
+    background-color: #2d3748 !important;
+}
+
+.dark-mode .text-muted {
+    color: #a0aec0 !important;
+}
+
+.dark-mode .form-control {
+    background-color: #2d3748 !important;
+    color: #ffffff !important;
+    border: 1px solid #4a5568 !important;
+}
+
+.dark-mode .card-header {
+    background-color: #4a5568 !important;
+    color: #ffffff !important;
+    border-bottom: 1px solid #718096 !important;
+}
+
+.dark-mode .text-primary {
+    color: #63b3ed !important;
+}
