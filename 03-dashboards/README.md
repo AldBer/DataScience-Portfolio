@@ -27,19 +27,21 @@ Dash-Bootstrap-Components==1.5.0  # UI profissional
 NumPy==1.26.0          # Cálculos numéricos
 ```
 
-📥 Instalação e Execução
+📥 Instalação e Execução 
+
 Pré-requisitos
+
 Python 3.8 ou superior
 
 Git instalado
 
 1. Clonar o Repositório
-```bash
+```python
 git clone https://github.com/AldBer/DataScience-Portfolio.git
 cd DataScience-Portfolio/03-dashboards
 ```
 2. Configurar Ambiente Virtual
-```bash
+```python
 # Criar ambiente (opcional mas recomendado)
 python -m venv dash_env
 source dash_env/bin/activate  # Linux/Mac
@@ -47,11 +49,11 @@ source dash_env/bin/activate  # Linux/Mac
 dash_env\Scripts\activate     # Windows
 ```
 3. Instalar Dependências
-```bash
+```python
 pip install -r requirements.txt
 ```
 4. Executar a Aplicação
-```bash
+```python
 python app.py
 ```
 5. Acessar o Dashboard
