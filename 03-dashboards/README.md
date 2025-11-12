@@ -1,6 +1,6 @@
 📊 Dashboard de Performance de Vendas
 
-![Dashboard Preview](assests/dash_01.png)
+![Dashboard Preview](assets/dash_01.png)
 ![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
 ![Dash](https://img.shields.io/badge/Dash-2.14.1-blue)
 ![Plotly](https://img.shields.io/badge/Plotly-5.17.0-orange)
