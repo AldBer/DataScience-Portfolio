@@ -3,81 +3,191 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
+  workflow_dispatch:  # Permite execução manual
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
     runs-on: ubuntu-latest
-    permissions:
-      contents: write   # Change from 'read' to 'write'
-      pages: write
-      id-token: write
     
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           lfs: true
+          fetch-depth: 0
 
-      - name: Setup Python
+      - name: Setup Python (se necessário)
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies (se necessário)
+      - name: Build static site structure
         run: |
-          # Descomente se precisar instalar dependências Python
-          # pip install -r requirements.txt
-
-      - name: Build site structure
-        run: |
+          # Cria diretório para deploy
           mkdir -p _site
-          touch _site/.nojekyll
-
-          # Verifica se existe dashboards e copia
-          if [ -d "dashboards" ]; then
-            cp -r dashboards _site/
-            echo "Dashboards copiado"
+          
+          # Arquivo especial para desabilitar Jekyll
+          echo '' > _site/.nojekyll
+          
+          # Cria index.html principal (já existe, apenas copia)
+          if [ -f "index.html" ]; then
+            cp index.html _site/
+            echo "✅ index.html copiado"
           else
-            echo "Pasta dashboards não encontrada!"
-            ls -la
+            echo "⚠️  index.html não encontrado! Criando placeholder..."
+            cat > _site/index.html << 'EOF'
+            <!DOCTYPE html>
+            <html lang="pt-BR">
+              <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Aldo Bernardi - Data Science Portfolio</title>
+                <style>
+                  body { 
+                    font-family: Arial, sans-serif; 
+                    text-align: center; 
+                    margin: 50px;
+                    background: #0a0a0a;
+                    color: white;
+                  }
+                  .container { max-width: 800px; margin: 0 auto; }
+                  a { color: #00d2ff; text-decoration: none; }
+                </style>
+              </head>
+              <body>
+                <div class="container">
+                  <h1>🚀 Portfolio em Atualização</h1>
+                  <p>O portfolio está passando por melhorias. Em breve estará disponível!</p>
+                  <p>Acesse o repositório: 
+                    <a href="https://github.com/AldBer/DataScience-Portfolio">GitHub</a>
+                  </p>
+                </div>
+              </body>
+            </html>
+            EOF
           fi
           
-          # Cria index.html de redirecionamento
-          cat > _site/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html lang="pt-BR">
-            <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>DataScience Portfolio - Redirecionando...</title>
-              <meta http-equiv="refresh" content="0; url=dashboards/" />
-              <style>
-                body { 
-                  font-family: Arial, sans-serif; 
-                  text-align: center; 
-                  margin-top: 50px; 
-                }
-              </style>
-            </head>
-            <body>
-              <h1>Redirecionando para os Dashboards...</h1>
-              <p>Se não for redirecionado automaticamente, <a href="dashboards/">clique aqui</a>.</p>
-            </body>
-          </html>
-          EOF
-          
-          # Copia outros arquivos importantes
+          # Copia README.md
           if [ -f "README.md" ]; then
             cp README.md _site/
+            echo "✅ README.md copiado"
           fi
           
-          # Lista o que foi criado para debug
-          echo "Estrutura criada:"
-          find _site -type f
+          # Copia projetos para deploy estático
+          if [ -d "projects" ]; then
+            # Copia toda a estrutura de projetos
+            cp -r projects _site/
+            echo "✅ Projetos copiados"
+            
+            # Garante que cada projeto tenha um index.html
+            for project in _site/projects/*/; do
+              if [ -d "$project" ]; then
+                project_name=$(basename "$project")
+                cat > "$project/index.html" << EOF
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>${project_name} - Aldo Bernardi</title>
+  <meta http-equiv="refresh" content="0; url=../../" />
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      margin-top: 50px; 
+      background: #0a0a0a;
+      color: white;
+    }
+    a { color: #00d2ff; }
+  </style>
+</head>
+<body>
+  <h1>Redirecionando para o Portfolio Principal...</h1>
+  <p>Se não for redirecionado automaticamente, <a href="../../">clique aqui</a>.</p>
+</body>
+</html>
+EOF
+              fi
+            done
+          fi
+          
+          # Copia assets globais
+          if [ -d "assets" ]; then
+            cp -r assets _site/
+            echo "✅ Assets copiados"
+          fi
+          
+          # Cria arquivo 404 personalizado
+          cat > _site/404.html << 'EOF'
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Não Encontrada - Aldo Bernardi</title>
+  <style>
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      margin: 100px auto;
+      max-width: 600px;
+      background: #0a0a0a;
+      color: white;
+      line-height: 1.6;
+    }
+    h1 { color: #00d2ff; font-size: 3em; margin-bottom: 20px; }
+    a { 
+      color: #00d2ff; 
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: 2px solid #00d2ff;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+    a:hover { background: #00d2ff; color: #0a0a0a; }
+    .container { padding: 40px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>404</h1>
+    <h2>Página Não Encontrada</h2>
+    <p>A página que você está procurando pode ter sido movida ou não existe mais.</p>
+    <p>Volte para o <a href="/">portfolio principal</a>.</p>
+  </div>
+</body>
+</html>
+EOF
+          echo "✅ Página 404 criada"
+          
+          # Lista estrutura final para debug
+          echo "📁 Estrutura final do site:"
+          find _site -type f | head -20
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './_site'
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./_site
-          force_orphan: true
+        id: deployment
+        uses: actions/deploy-pages@v4
