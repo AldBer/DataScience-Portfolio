@@ -75,7 +75,7 @@ Métricas Principais
 🎯 Ticket Médio: Valor médio por venda
 
 📊 Estrutura do Projeto
-
+```
 03-dashboards/
 ├── 📄 app.py                 # Aplicação principal
 ├── 📄 README.md              # Documentação
@@ -89,7 +89,7 @@ Métricas Principais
 ├── 📄 requirements.txt       # Dependências
 ├── 📄 .gitignore            # Arquivos ignorados
 └── 📄 LICENSE               # Licença MIT
-
+```
 
 🔧 Desenvolvimento
 
