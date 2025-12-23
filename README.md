@@ -1,100 +1,64 @@
 # 🚀 Aldo Bernardi - Data Science & Cybersecurity Portfolio
 
-![Header](https://img.shields.io/badge/Data-Scientist-blue)
-![AWS](https://img.shields.io/badge/AWS-Cloud-orange)
-![Cybersecurity](https://img.shields.io/badge/Cybersecurity-Analyst-red)
-![Python](https://img.shields.io/badge/Python-Expert-green)
+![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-## 👨‍💻 Sobre Mim
+## 🌐 Live Portfolio
+**[https://aldber.github.io/DataScience-Portfolio/](https://aldber.github.io/DataScience-Portfolio/)**
 
-**Data Scientist** com background em análise de negócios, especializando-se em **Cybersecurity Analytics** e **Cloud Computing**. Transformando dados em insights estratégicos com segurança.
+## 📊 Projetos em Destaque
 
-> *"Dados sem segurança são como castelo sem muros - bonitos, mas vulneráveis"*
+| Projeto | Descrição | Tecnologias | Demo |
+|---------|-----------|-------------|------|
+| 🏠 [Real Estate Analytics](projects/01-real-estate-sp) | Dashboard de preços de imóveis | Streamlit, GeoPandas | [Live Demo](https://01-sp-housing-aldber.streamlit.app/) |
+| 💰 [SQL Analytics](projects/02-sql-analytics) | Queries avançadas e otimização | PostgreSQL, Python | [Código](projects/02-sql-analytics) |
+| 📊 [Sales Dashboard](projects/03-sales-dashboard) | Dashboard interativo de vendas | Dash, Plotly, Bootstrap | [Preview](projects/03-sales-dashboard) |
+| 🔐 [CyberFinance Guardian](projects/04-cyber-finance-guardian) | Cybersecurity + Finanças (Em breve) | Python, Security | 🚧 |
+| ☁️ [AWS Security Labs](projects/05-aws-security-labs) | Laboratórios de cloud security (Em breve) | AWS, Security | 🚧 |
 
-## 📊 Business Impact
+## 🛠️ Tech Stack
 
-| Métrica | Impacto | Tecnologias |
-|---------|---------|-------------|
-| **Real Estate Analytics** | +15% precisão em precificação | Python, Streamlit, GeoPandas |
-| **SQL Optimization** | -60% tempo de execução | PostgreSQL, Window Functions |
-| **Data Pipelines** | +85% eficiência em ETL | Python, Pandas, APIs |
-| **Dashboards Interativos** | 4 projetos em produção | Streamlit, Plotly |
+### 📊 Data Science & Analytics
+- **Python** (Pandas, NumPy, Scikit-learn)
+- **SQL** (PostgreSQL, Query Optimization)
+- **Visualização** (Plotly, Dash, Streamlit)
 
-## 🛠 Tech Stack
+### ☁️ Cloud & DevOps
+- **AWS** (EC2, S3, Lambda, Cloud Practitioner)
+- **Docker** (Containerização)
+- **Git/GitHub** (CI/CD, Versionamento)
 
-### **📊 Data Science & Analytics**
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![SQL](https://img.shields.io/badge/SQL-4479A1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Plotly](https://img.shields.io/badge/Plotly-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+### 🔐 Cybersecurity  
+- **Network Security** (CCNA1 em andamento)
+- **Security Analytics**
+- **Compliance & Privacy**
 
-### **☁️ Cloud & DevOps**  
-![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+## 📈 Business Impact
 
-### **🔐 Cybersecurity**
-![Cisco](https://img.shields.io/badge/Cisco-1BA0D7?style=for-the-badge&logo=cisco&logoColor=white)
-![Wireshark](https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white)
+| Projeto | Impacto | Métricas |
+|---------|---------|----------|
+| Real Estate | +15% precisão em precificação | ML models, geospatial analysis |
+| SQL Optimization | -60% tempo de execução | Query tuning, indexes |
+| Sales Dashboard | 5+ visualizações interativas | Real-time KPIs, filtering |
 
-## 🎯 Projetos em Destaque
-
-### 🏠 [01 - Real Estate SP Analytics](01-real-estate-sp/)
-**Dashboard interativo** de preços de imóveis em São Paulo.
-
-### 💰 [02 - SQL Analytics & Optimization](02-sql-projects/)
-**Análises avançadas** com PostgreSQL e queries complexas.
-
-### 📊 [03 - Business Intelligence Dashboards](03-dashboards/)
-**Visualizações interativas** para tomada de decisão.
-
-### 🔐 [04 - CyberFinance Guardian](04-cyber-finance-guardian/)
-**Plataforma integrada** de cybersecurity financeira.
-
-### ☁️ [05 - AWS Security Labs](05-aws-security-labs/)
-**Laboratórios práticos** de segurança em cloud AWS.
-
-## 📈 Certificações em Andamento
-
-| Certificação | Status | Previsão |
-|-------------|---------|----------|
-| **Cisco CCNA1** | 🟡 Em Andamento | Dez/2025 |
-| **AWS Cloud Practitioner** | 🟡 Em Andamento | Dez/2025 |
-| **ANBIMA CPA10** | 🟡 Estudando | Fev/2026 |
-| **Cisco CyberOps Associate** | 🟢 Próxima | Mar/2026 |
-
-## 🎓 Journey de Aprendizado
+## 🎓 Learning Journey
 
 ```mermaid
-graph TB
-    A([🎯 Business Analysis]) --> B([🐍 Python & SQL])
-    B --> C([📊 Data Science])
-    C --> D([🔐 Cybersecurity])
-    D --> E([☁️ Cloud AWS])
-    E --> F([🤖 ML Engineering])
-    F --> G([⚡ DevSecOps])
-    
-    style A fill:#e1f5fe
-    style B fill:#f3e5f5
-    style C fill:#e8f5e8
-    style D fill:#fff3e0
-    style E fill:#fce4ec
-    style F fill:#e0f2f1
-    style G fill:#fff8e1
-````
-## 📊 GitHub Analytics
+graph LR
+    A[Business Analysis] --> B[Python & SQL]
+    B --> C[Data Science]
+    C --> D[Cybersecurity]
+    D --> E[Cloud AWS]
+```
 
-![AldBer's GitHub stats](https://github-readme-stats.vercel.app/api?username=AldBer&show_icons=true&theme=radical)
+## 📫 Contact
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=AldBer&layout=compact&theme=radical)
+- 📧 Email: [aldo.bernardi@gmail.com](mailto:aldo.bernardi@gmail.com)
+- 💼 LinkedIn: [Aldo Bernardi](https://linkedin.com/in/aldo-bernardi)
+- 🔗 GitHub: [@AldBer](https://github.com/AldBer)
+- 🏆 Credly: [Badges](https://credly.com/users/aldo-bernardi.5b9ee3e3/badges)
 
-## 📫 Vamos Conversar?
+## 📄 License
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/aldo-bernardi)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=for-the-badge&logo=github)](https://github.com/AldBer)
-[![Email](https://img.shields.io/badge/Email-Contact%20Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:aldo.bernardi@exemplo.com)
-[![Credly](https://img.shields.io/badge/Credly-View%20Badges-FF6B00?style=for-the-badge&logo=credly&logoColor=white)](https://www.credly.com/users/aldo-bernardi.5b9ee3e3/badges)
-
-## 🏆 Certifications
-
-[![Credly Profile](https://img.shields.io/badge/Credly-View%20All%20Badges-FF6B00?style=for-the-badge&logo=credly&logoColor=white)](https://www.credly.com/users/aldo-bernardi.5b9ee3e3/badges)
+MIT License - Veja [LICENSE](LICENSE) para detalhes.
