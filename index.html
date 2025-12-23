@@ -3,16 +3,16 @@
 <head> 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aldo Bernardi | Portfólio de Ciência de Dados</title>
-    <meta name="description" content="Portfólio profissional de Aldo Bernardi - Cientista de Dados especializado em Python, SQL, Machine Learning e Visualização de Dados">
-    <meta name="keywords" content="ciência de dados, portfolio, python, sql, power bi, machine learning, aldo bernardi, análise de dados">
+    <title>Aldo Bernardi | Portfólio Data Science & Cybersecurity</title>
+    <meta name="description" content="Portfólio profissional de Aldo Bernardi - Data Science, SQL, Machine Learning, Cybersecurity e Cloud">
+    <meta name="keywords" content="ciência de dados, portfolio, python, sql, cybersecurity, aws, machine learning, aldo bernardi">
     <meta name="author" content="Aldo Bernardi">
-    <meta property="og:title" content="Aldo Bernardi | Portfólio de Ciência de Dados">
-    <meta property="og:description" content="Transformando dados em decisões estratégicas">
-    <meta property="og:image" content="/assets/images/portfolio-preview.png">
-    <meta property="og:url" content="https://aldber.github.io">
+    <meta property="og:title" content="Aldo Bernardi | Data Science & Cybersecurity Portfolio">
+    <meta property="og:description" content="Transformando dados em decisões estratégicas com foco em segurança">
+    <meta property="og:image" content="assets/images/portfolio-preview.png">
+    <meta property="og:url" content="https://aldber.github.io/DataScience-Portfolio/">
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="/_includes/favicon.ico">
+    <link rel="icon" href="assets/icons/favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -20,11 +20,13 @@
         :root {
             --bg-dark: #0a0a0a;
             --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --cyber-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
             --card-dark: #1a1a1a;
             --card-hover: #2a2a2a;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
             --accent: #6c63ff;
+            --cyber-accent: #00d2ff;
             --hover: #7d75ff;
             --success: #4CAF50;
             --warning: #FF9800;
@@ -56,7 +58,7 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background: rgba(10, 10, 10, 0.9);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
@@ -79,6 +81,13 @@
             font-size: 1.2rem;
             color: var(--text-primary);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-logo i {
+            color: var(--cyber-accent);
         }
 
         .nav-menu {
@@ -91,10 +100,11 @@
             color: var(--text-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
+            font-weight: 500;
         }
 
         .nav-link:hover {
-            color: var(--text-primary);
+            color: var(--cyber-accent);
         }
 
         .nav-toggle {
@@ -108,10 +118,13 @@
 
         /* === HERO SECTION === */
         .hero-section {
-            background: var(--bg-gradient);
-            padding: 60px 0;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), 
+                        url('assets/images/cyber-grid.png');
+            background-size: cover;
+            padding: 100px 0;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .hero-section::before {
@@ -121,136 +134,149 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
+            background: linear-gradient(45deg, transparent 65%, var(--cyber-accent) 75%, transparent 85%);
+            background-size: 200% 200%;
+            animation: cyberScan 3s linear infinite;
+            opacity: 0.1;
+            pointer-events: none;
         }
 
-        .profile-header {
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            margin-bottom: 40px;
+        @keyframes cyberScan {
+            0% { background-position: 200% 200%; }
+            100% { background-position: -200% -200%; }
         }
 
         .profile-image {
-            width: 150px;
-            height: 150px;
+            width: 180px;
+            height: 180px;
             border-radius: 50%;
-            border: 4px solid rgba(255,255,255,0.3);
+            border: 4px solid var(--cyber-accent);
             object-fit: cover;
-            box-shadow: var(--shadow);
+            box-shadow: 0 0 30px rgba(0, 210, 255, 0.5);
+            margin-bottom: 30px;
+            animation: pulse 3s infinite;
         }
 
-        .profile-info h1 {
-            font-size: 3em;
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 210, 255, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(0, 210, 255, 0.8); }
+        }
+
+        .hero-title {
+            font-size: 3.5em;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .profile-info h2 {
-            font-size: 1.5em;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 15px;
-        }
-
-        .profile-info p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            margin-bottom: 25px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn-accent {
-            background: rgba(255,255,255,0.2);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .btn-accent:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        /* === CONTEÚDO PRINCIPAL === */
-        .main-content {
-            background: var(--bg-dark);
-            padding: 60px 0;
-        }
-
-        /* Projeto em Destaque */
-        .featured-project {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 60px;
-            background: var(--card-dark);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .featured-project::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--bg-gradient);
-        }
-
-        .featured-image {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-        }
-
-        .featured-content h2 {
-            color: var(--accent);
-            margin-bottom: 10px;
-        }
-
-        .featured-content h3 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-        }
-
-        .featured-content p {
-            color: var(--text-secondary);
-            margin-bottom: 25px;
-            line-height: 1.7;
-        }
-
-        .section-title {
-            font-size: 2.5em;
-            margin-bottom: 40px;
-            text-align: center;
-            background: var(--bg-gradient);
+            background: linear-gradient(45deg, var(--cyber-accent), #6c63ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        /* Grid de Projetos */
+        .hero-subtitle {
+            font-size: 1.5em;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            border: 1px solid rgba(0, 210, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-accent {
+            background: linear-gradient(135deg, var(--cyber-accent), #3a7bd5);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.3);
+        }
+
+        .btn-accent:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: var(--text-primary);
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        /* === CONTEÚDO PRINCIPAL === */
+        .main-content {
+            background: var(--bg-dark);
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 50px;
+            text-align: center;
+            background: linear-gradient(45deg, var(--cyber-accent), #6c63ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--cyber-gradient);
+            border-radius: 2px;
+        }
+
+        /* Cards de Projeto */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
         }
@@ -263,98 +289,120 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            border-left: 4px solid var(--accent);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--cyber-gradient);
         }
 
         .project-card:hover {
             transform: translateY(-10px);
             box-shadow: var(--shadow-hover);
-            background: var(--card-hover);
+            border-color: var(--cyber-accent);
+        }
+
+        .project-icon {
+            font-size: 2em;
+            color: var(--cyber-accent);
+            margin-bottom: 15px;
         }
 
         .project-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 15px;
             font-size: 1.5em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--text-primary);
         }
 
         .project-card p {
             color: var(--text-secondary);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             line-height: 1.6;
         }
 
-        .project-card ul {
-            color: var(--text-secondary);
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
             margin-bottom: 20px;
-            padding-left: 20px;
         }
 
-        .project-card ul li {
-            margin-bottom: 8px;
+        .tech-tag {
+            background: rgba(0, 210, 255, 0.1);
+            color: var(--cyber-accent);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            border: 1px solid rgba(0, 210, 255, 0.3);
         }
 
         .project-links {
             display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             margin-top: 20px;
         }
 
         .btn-project {
-            background: var(--accent);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
+            background: var(--cyber-accent);
+            color: #0a0a0a;
+            padding: 10px 20px;
+            border-radius: 25px;
             text-decoration: none;
-            font-size: 0.9em;
+            font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            transition: all 0.2s ease;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: none;
         }
 
         .btn-project:hover {
-            background: var(--hover);
-            transform: scale(1.05);
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
         }
 
-        .btn-project.secondary {
-            background: rgba(255,255,255,0.1);
-            color: var(--text-secondary);
+        .btn-outline {
+            background: transparent;
+            color: var(--cyber-accent);
+            border: 2px solid var(--cyber-accent);
         }
 
-        .btn-project.secondary:hover {
-            background: rgba(255,255,255,0.2);
-            color: var(--text-primary);
+        .btn-outline:hover {
+            background: rgba(0, 210, 255, 0.1);
+            color: white;
         }
 
         .status-badge {
             position: absolute;
             top: 15px;
             right: 15px;
-            padding: 5px 12px;
-            border-radius: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
             font-size: 0.8em;
             font-weight: bold;
+            text-transform: uppercase;
         }
 
-        .status-active {
+        .status-live {
             background: var(--success);
             color: white;
         }
 
-        .status-development {
+        .status-dev {
             background: var(--warning);
             color: white;
         }
 
-        /* Seção de Habilidades */
+        /* Seção de Skills */
         .skills-section {
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .skills-grid {
@@ -363,17 +411,18 @@
             gap: 30px;
         }
 
-        .skill-card {
+        .skill-category {
             background: var(--card-dark);
             padding: 30px;
             border-radius: 15px;
             box-shadow: var(--shadow);
-            border-top: 4px solid var(--accent);
+            border-top: 4px solid var(--cyber-accent);
         }
 
-        .skill-card h4 {
-            margin-bottom: 20px;
-            color: var(--text-primary);
+        .skill-category h4 {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            color: var(--cyber-accent);
             display: flex;
             align-items: center;
             gap: 10px;
@@ -383,10 +432,20 @@
             margin-bottom: 20px;
         }
 
-        .skill-item span {
-            display: block;
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 8px;
+        }
+
+        .skill-name {
             color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .skill-percent {
+            color: var(--cyber-accent);
+            font-weight: bold;
         }
 
         .skill-bar-container {
@@ -398,52 +457,71 @@
 
         .skill-bar {
             height: 100%;
-            background: var(--bg-gradient);
+            background: var(--cyber-gradient);
             border-radius: 4px;
-            transition: width 1s ease;
+            width: 0;
+            transition: width 1.5s ease-out;
         }
 
         /* Seção de Contato */
         .contact-section {
             text-align: center;
             background: var(--card-dark);
-            padding: 50px;
+            padding: 60px;
             border-radius: 20px;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            margin-top: 40px;
         }
 
         .contact-section h3 {
-            font-size: 2em;
+            font-size: 2.2em;
             margin-bottom: 20px;
+            color: var(--cyber-accent);
         }
 
         .contact-section p {
             color: var(--text-secondary);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             font-size: 1.1em;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Footer */
         .footer {
             background: var(--card-dark);
-            padding: 20px 0;
+            padding: 30px 0;
             text-align: center;
             color: var(--text-secondary);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 80px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--cyber-accent);
         }
 
         /* === ANIMAÇÕES === */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -451,13 +529,12 @@
             }
         }
 
-        .animate-on-scroll {
+        .animate {
             animation: fadeInUp 0.6s ease forwards;
         }
 
         /* === RESPONSIVIDADE === */
         @media (max-width: 768px) {
-            /* Menu Mobile */
             .nav-menu {
                 position: fixed;
                 top: 70px;
@@ -470,6 +547,7 @@
                 box-shadow: var(--shadow);
                 padding: 2rem 0;
                 gap: 0;
+                z-index: 1000;
             }
 
             .nav-menu.active {
@@ -479,6 +557,7 @@
             .nav-link {
                 padding: 1rem;
                 display: block;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
             }
 
             .nav-toggle {
@@ -526,19 +605,8 @@
                 top: 0;
             }
 
-            /* Layout Responsivo */
-            .profile-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .profile-info h1 {
+            .hero-title {
                 font-size: 2.5em;
-            }
-
-            .featured-project {
-                grid-template-columns: 1fr;
-                padding: 30px 20px;
             }
 
             .projects-grid {
@@ -549,10 +617,13 @@
                 grid-template-columns: 1fr;
             }
 
-            .social-links,
-            .contact-links {
+            .project-links {
                 flex-direction: column;
-                align-items: center;
+            }
+
+            .btn-project, .btn-outline {
+                width: 100%;
+                justify-content: center;
             }
 
             .container {
@@ -575,7 +646,10 @@
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <a href="#inicio" class="nav-logo">Aldo Bernardi</a>
+                <a href="#inicio" class="nav-logo">
+                    <i class="fas fa-terminal"></i>
+                    Aldo Bernardi
+                </a>
                 <ul class="nav-menu">
                     <li><a href="#projetos" class="nav-link">Projetos</a></li>
                     <li><a href="#habilidades" class="nav-link">Habilidades</a></li>
@@ -591,24 +665,27 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero-section">
         <div class="container">
-            <div class="profile-header">
-                <img src="https://avatars.githubusercontent.com/u/85644066" alt="Aldo Bernardi" class="profile-image">
-                <div class="profile-info">
-                    <h1>Portfólio de Ciência de Dados</h1>
-                    <h2>Aldo Bernardi</h2>
-                    <p>Transformando dados em decisões estratégicas</p>
-                    <div class="social-links">
-                        <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-accent" target="_blank">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                        <a href="https://github.com/aldber" class="btn-accent" target="_blank">
-                            <i class="fab fa-github"></i> GitHub
-                        </a>
-                        <a href="mailto:aldo.bernardi@gmail.com" class="btn-accent">
-                            <i class="fas fa-envelope"></i> Email
-                        </a>
-                    </div>
-                </div>
+            <img src="https://avatars.githubusercontent.com/u/85644066" alt="Aldo Bernardi" class="profile-image">
+            <h1 class="hero-title">Data Science & Cybersecurity</h1>
+            <p class="hero-subtitle">Transformando dados em decisões estratégicas com foco em segurança e inovação</p>
+            
+            <div class="badge-container">
+                <span class="badge">🏆 AWS Certified</span>
+                <span class="badge">🔐 Cybersecurity</span>
+                <span class="badge">📊 Data Science</span>
+                <span class="badge">☁️ Cloud Computing</span>
+            </div>
+            
+            <div class="social-links">
+                <a href="https://github.com/aldber" class="btn-accent" target="_blank">
+                    <i class="fab fa-github"></i> GitHub Portfolio
+                </a>
+                <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-secondary" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="mailto:aldo.bernardi@gmail.com" class="btn-secondary">
+                    <i class="fas fa-envelope"></i> Contato
+                </a>
             </div>
         </div>
     </section>
@@ -616,108 +693,131 @@
     <!-- Main Content -->
     <main class="main-content">
         <div class="container">
-            <!-- Featured Project -->
-            <section class="featured-project">
-                <img src="../01-real-estate-sp/assets/screenshots/distribuicao_precos.png" alt="Dashboard Imobiliário SP" class="featured-image">
-                <div class="featured-content">
-                    <h2>🏆 Projeto em Destaque</h2>
-                    <h3>Análise Imobiliária de São Paulo</h3>
-                    <p>Explore os padrões de preços por distrito com este dashboard interativo que combina análise geográfica avançada com visualizações 3D e mapas de calor interativos.</p>
-                    <div class="project-links">
-                        <a href="../01-real-estate-sp/notebooks/" class="btn-project">
-                            <i class="fas fa-code"></i> Ver Notebooks
-                        </a>
-                        <a href="../01-real-estate-sp/app_housing.py" class="btn-project">
-                            <i class="fas fa-map"></i> Dashboard Interativo
-                        </a>
-                        <a href="../01-real-estate-sp/" class="btn-project">
-                            <i class="fas fa-home"></i> Acessar Projeto
-                        </a>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Projects Section -->
+            <!-- Featured Projects -->
             <section id="projetos">
                 <h2 class="section-title">🚀 Projetos em Destaque</h2>
                 
                 <div class="projects-grid">
-                    <!-- Crypto Monitor -->
-                    <article class="project-card">
-                        <div class="status-badge status-active">Ativo</div>
-                        <h3><i class="fas fa-chart-line"></i> Monitor de Criptoativos</h3>
-                        <p><strong>Resumo:</strong> Sistema automatizado para análise de oportunidades de trading em criptomoedas com atualização horária via GitHub Actions.</p>
-                        <p><strong>Tecnologias:</strong> Python, Streamlit, CCXT, Telegram API, GitHub Actions</p>
+                    <!-- Real Estate Analytics -->
+                    <article class="project-card animate">
+                        <span class="status-badge status-live">Live</span>
+                        <div class="project-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Real Estate SP Analytics</h3>
+                        <p>Dashboard interativo para análise de preços de imóveis em São Paulo com mapas 3D e visualizações geoespaciais avançadas.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Streamlit</span>
+                            <span class="tech-tag">GeoPandas</span>
+                            <span class="tech-tag">Plotly</span>
+                        </div>
                         
                         <div class="project-links">
-                            <a href="https://aldber-crypto.streamlit.app/" class="btn-project" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Ver Dashboard
+                            <a href="projects/01-real-estate-sp/" class="btn-project">
+                                <i class="fas fa-external-link-alt"></i> Ver Projeto
                             </a>
-                            <a href="../.github/workflows/crypto/bot.yml" class="btn-project secondary">
-                                <i class="fas fa-code-branch"></i> Workflow
+                            <a href="https://01-sp-housing-aldber.streamlit.app/" class="btn-outline" target="_blank">
+                                <i class="fas fa-rocket"></i> Live Demo
                             </a>
                         </div>
                     </article>
 
-                    <!-- SP Housing Analysis -->
-                    <article class="project-card">
-                        <div class="status-badge status-active">Ativo</div>
-                        <h3><i class="fas fa-home"></i> Análise Imobiliária SP</h3>
-                        <p>Dashboard completo para análise do mercado imobiliário de São Paulo com mapas interativos, visualizações 3D e análise geográfica avançada.</p>
-                        <p><strong>Tecnologias:</strong> Python, Streamlit, Pandas, Plotly, Folium, GeoPandas</p>
-                        
-                        <div class="project-links">
-                            <a href="../01-real-estate-sp/app_housing.py" class="btn-project">
-                                <i class="fas fa-chart-area"></i> Ver Dashboard
-                            </a>
-                            <a href="../01-real-estate-sp/notebooks/" class="btn-project secondary">
-                                <i class="fas fa-book"></i> Notebooks
-                            </a>
+                    <!-- SQL Analytics -->
+                    <article class="project-card animate">
+                        <span class="status-badge status-live">Live</span>
+                        <div class="project-icon">
+                            <i class="fas fa-database"></i>
                         </div>
-                    </article>
-                </div>
-            </section>
-
-            <!-- SQL & BI Projects -->
-            <section>
-                <h2 class="section-title">📊 Projetos SQL e Business Intelligence</h2>
-                
-                <div class="projects-grid">
-                    <article class="project-card">
-                        <h3><i class="fas fa-database"></i> Fundamentos de SQL</h3>
-                        <p><strong>Semana 01 - Atividades:</strong></p>
-                        <ul>
-                            <li>Importação de base de imóveis reais (São Paulo)</li>
-                            <li>Criação da estrutura de banco de dados</li>
-                            <li>Consultas básicas: SELECT, WHERE, ORDER BY, LIMIT</li>
-                        </ul>
+                        <h3>SQL Analytics & Optimization</h3>
+                        <p>Análises avançadas com PostgreSQL, otimização de queries, ETL pipelines e relatórios de business intelligence.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">ETL</span>
+                            <span class="tech-tag">BI</span>
+                        </div>
                         
                         <div class="project-links">
-                            <a href="../03-sql-projects/Semana_01/" class="btn-project">
+                            <a href="projects/02-sql-analytics/" class="btn-project">
                                 <i class="fas fa-folder-open"></i> Ver Projeto
                             </a>
-                            <a href="#" class="btn-project secondary">
-                                <i class="fas fa-file-code"></i> queries_basicas_01.sql
+                            <a href="projects/02-sql-analytics/Semana_02/sp_kpis_dashboard.pbix" class="btn-outline">
+                                <i class="fas fa-chart-bar"></i> Dashboard PBI
                             </a>
                         </div>
                     </article>
 
-                    <article class="project-card">
-                        <h3><i class="fas fa-chart-bar"></i> Agregações e KPIs</h3>
-                        <p><strong>Semana 02 - Atividades:</strong></p>
-                        <ul>
-                            <li>Funções agregadas: AVG, SUM, COUNT, MIN, MAX</li>
-                            <li>Agrupamentos com GROUP BY e filtros com HAVING</li>
-                            <li>Exportação de dados para Power BI</li>
-                            <li>Dashboard de KPIs com indicadores e mapa</li>
-                        </ul>
+                    <!-- Sales Dashboard -->
+                    <article class="project-card animate">
+                        <span class="status-badge status-live">Live</span>
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Sales Intelligence Dashboard</h3>
+                        <p>Dashboard premium para análise de performance de vendas com dark/light mode, filtros avançados e KPIs em tempo real.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Dash</span>
+                            <span class="tech-tag">Plotly</span>
+                            <span class="tech-tag">Pandas</span>
+                            <span class="tech-tag">Bootstrap</span>
+                        </div>
                         
                         <div class="project-links">
-                            <a href="../03-sql-projects/Semana_02/" class="btn-project">
-                                <i class="fas fa-chart-pie"></i> Ver Projeto
+                            <a href="projects/03-sales-dashboard/" class="btn-project">
+                                <i class="fas fa-tachometer-alt"></i> Ver Dashboard
                             </a>
-                            <a href="#" class="btn-project secondary">
-                                <i class="fas fa-file-powerpoint"></i> sp_kpis_dashboard.pbix
+                            <a href="projects/03-sales-dashboard/assets/dash_01.png" class="btn-outline">
+                                <i class="fas fa-image"></i> Preview
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- CyberFinance Guardian -->
+                    <article class="project-card animate">
+                        <span class="status-badge status-dev">Em breve</span>
+                        <div class="project-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>CyberFinance Guardian</h3>
+                        <p>Sistema de segurança cibernética para análise de transações financeiras com detecção de fraudes em tempo real.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">ML</span>
+                            <span class="tech-tag">APIs</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="projects/04-cyber-finance-guardian/" class="btn-project">
+                                <i class="fas fa-code"></i> Detalhes
+                            </a>
+                        </div>
+                    </article>
+
+                    <!-- AWS Security Labs -->
+                    <article class="project-card animate">
+                        <span class="status-badge status-dev">Em breve</span>
+                        <div class="project-icon">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <h3>AWS Security Labs</h3>
+                        <p>Laboratórios práticos de segurança na nuvem AWS com hardening de instâncias, monitoramento e automação.</p>
+                        
+                        <div class="tech-tags">
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Cloud</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                        
+                        <div class="project-links">
+                            <a href="projects/05-aws-security-labs/" class="btn-project">
+                                <i class="fas fa-cloud"></i> Detalhes
                             </a>
                         </div>
                     </article>
@@ -725,74 +825,111 @@
             </section>
 
             <!-- Skills Section -->
-            <section id="habilidades">
-                <h2 class="section-title">🛠️ Habilidades Técnicas</h2>
+            <section id="habilidades" class="skills-section">
+                <h2 class="section-title">🛠️ Stack Tecnológico</h2>
                 
                 <div class="skills-grid">
-                    <div class="skill-card">
-                        <h4><i class="fas fa-code"></i> Linguagens de Programação</h4>
+                    <!-- Data Science -->
+                    <div class="skill-category animate">
+                        <h4><i class="fas fa-chart-bar"></i> Data Science & Analytics</h4>
                         
                         <div class="skill-item">
-                            <span>Python (Pandas, NumPy, Scikit-learn)</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Python (Pandas, NumPy, Scikit-learn)</span>
+                                <span class="skill-percent">90%</span>
+                            </div>
                             <div class="skill-bar-container">
                                 <div class="skill-bar" data-width="90%"></div>
                             </div>
                         </div>
                         
                         <div class="skill-item">
-                            <span>SQL (PostgreSQL, BigQuery)</span>
+                            <div class="skill-header">
+                                <span class="skill-name">SQL & Database Optimization</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="skill-bar-container">
                                 <div class="skill-bar" data-width="85%"></div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="skill-card">
-                        <h4><i class="fas fa-chart-line"></i> Visualização de Dados</h4>
                         
                         <div class="skill-item">
-                            <span>Plotly & Dash</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Data Visualization (Plotly, Dash, Streamlit)</span>
+                                <span class="skill-percent">88%</span>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar" data-width="88%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cybersecurity -->
+                    <div class="skill-category animate">
+                        <h4><i class="fas fa-shield-alt"></i> Cybersecurity & Cloud</h4>
+                        
+                        <div class="skill-item">
+                            <div class="skill-header">
+                                <span class="skill-name">AWS Cloud Security</span>
+                                <span class="skill-percent">80%</span>
+                            </div>
                             <div class="skill-bar-container">
                                 <div class="skill-bar" data-width="80%"></div>
                             </div>
                         </div>
                         
                         <div class="skill-item">
-                            <span>GeoPandas & Folium</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Network Security (CCNA1)</span>
+                                <span class="skill-percent">75%</span>
+                            </div>
                             <div class="skill-bar-container">
                                 <div class="skill-bar" data-width="75%"></div>
                             </div>
                         </div>
-
+                        
                         <div class="skill-item">
-                            <span>Power BI</span>
+                            <div class="skill-header">
+                                <span class="skill-name">DevOps & Containerization</span>
+                                <span class="skill-percent">78%</span>
+                            </div>
                             <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="85%"></div>
+                                <div class="skill-bar" data-width="78%"></div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="skill-card">
-                        <h4><i class="fas fa-tools"></i> Ferramentas e DevOps</h4>
+                    <!-- Tools & Others -->
+                    <div class="skill-category animate">
+                        <h4><i class="fas fa-tools"></i> Ferramentas & Métodos</h4>
                         
                         <div class="skill-item">
-                            <span>Git & GitHub</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Git & GitHub (CI/CD)</span>
+                                <span class="skill-percent">92%</span>
+                            </div>
                             <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="88%"></div>
+                                <div class="skill-bar" data-width="92%"></div>
                             </div>
                         </div>
                         
                         <div class="skill-item">
-                            <span>Docker</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Power BI & Business Intelligence</span>
+                                <span class="skill-percent">85%</span>
+                            </div>
                             <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="70%"></div>
+                                <div class="skill-bar" data-width="85%"></div>
                             </div>
                         </div>
-
+                        
                         <div class="skill-item">
-                            <span>Streamlit</span>
+                            <div class="skill-header">
+                                <span class="skill-name">Agile & Project Management</span>
+                                <span class="skill-percent">82%</span>
+                            </div>
                             <div class="skill-bar-container">
-                                <div class="skill-bar" data-width="90%"></div>
+                                <div class="skill-bar" data-width="82%"></div>
                             </div>
                         </div>
                     </div>
@@ -800,19 +937,16 @@
             </section>
 
             <!-- Contact Section -->
-            <section id="contato" class="contact-section">
-                <h3>📬 Vamos Conversar</h3>
-                <p>Interessado em trabalhar juntos? Estou aberto a oportunidades e colaborações em projetos de ciência de dados.</p>
+            <section id="contato" class="contact-section animate">
+                <h3>🚀 Pronto para Transformar Dados em Resultados?</h3>
+                <p>Estou sempre aberto a discutir novas oportunidades, colaborações em projetos interessantes ou simplesmente trocar ideias sobre tecnologia e inovação.</p>
                 
-                <div class="contact-links">
-                    <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-accent" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
+                <div class="project-links" style="justify-content: center;">
+                    <a href="mailto:aldo.bernardi@gmail.com" class="btn-project" style="padding: 15px 30px;">
+                        <i class="fas fa-paper-plane"></i> Enviar Email
                     </a>
-                    <a href="https://github.com/aldber" class="btn-accent" target="_blank">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                    <a href="mailto:aldo.bernardi@gmail.com" class="btn-accent">
-                        <i class="fas fa-envelope"></i> Enviar Email
+                    <a href="https://linkedin.com/in/aldo-bernardi/" class="btn-outline" target="_blank" style="padding: 15px 30px;">
+                        <i class="fab fa-linkedin"></i> Conectar no LinkedIn
                     </a>
                 </div>
             </section>
@@ -822,7 +956,25 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/aldber" class="footer-link" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com/in/aldo-bernardi/" class="footer-link" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="mailto:aldo.bernardi@gmail.com" class="footer-link">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://aldber.github.io/DataScience-Portfolio/" class="footer-link">
+                    <i class="fas fa-globe"></i> Portfolio Online
+                </a>
+            </div>
+            
             <p>&copy; <span id="current-year"></span> Aldo Bernardi. Todos os direitos reservados.</p>
+            <p style="margin-top: 10px; font-size: 0.9em; color: #666;">
+                Built with <i class="fas fa-heart" style="color: #ff4757;"></i> and modern web technologies
+            </p>
         </div>
     </footer>
 
@@ -855,71 +1007,73 @@
 
         // === ANIMAÇÃO AO ROLAR A PÁGINA ===
         function handleScrollAnimations() {
-            const cards = document.querySelectorAll('.project-card, .skill-card');
-            cards.forEach((card, index) => {
-                const cardTop = card.getBoundingClientRect().top;
+            const animateElements = document.querySelectorAll('.animate');
+            animateElements.forEach((element, index) => {
+                const elementTop = element.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
                 
-                if (cardTop < windowHeight - 100) {
+                if (elementTop < windowHeight - 100 && !element.classList.contains('animated')) {
                     setTimeout(() => {
-                        card.classList.add('animate-on-scroll');
-                    }, index * 100);
+                        element.classList.add('animated');
+                        element.style.animationDelay = `${index * 0.1}s`;
+                    }, 100);
                 }
             });
         }
 
         // === ATUALIZAR ANO NO FOOTER ===
         function updateCurrentYear() {
-            const yearElement = document.getElementById('current-year');
-            if (yearElement) {
-                yearElement.textContent = new Date().getFullYear();
-            }
+            document.getElementById('current-year').textContent = new Date().getFullYear();
         }
 
-        // === CONFIGURAR OBSERVER PARA ANIMAÇÕES ===
+        // === INTERSECTION OBSERVER PARA ANIMAÇÕES ===
         function setupIntersectionObserver() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
                     }
                 });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
             });
 
-            // Aplicar observer aos cards
-            document.querySelectorAll('.project-card, .skill-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(50px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            // Observar todos os cards
+            document.querySelectorAll('.project-card, .skill-category, .contact-section').forEach(card => {
                 observer.observe(card);
             });
         }
 
         // === EVENT LISTENERS ===
         document.addEventListener('DOMContentLoaded', function() {
-            // Animar barras de habilidades após carregamento
+            // Animar barras de habilidades
             setTimeout(animateSkillBars, 1000);
             
-            // Configurar observer para animações
+            // Configurar observer
             setupIntersectionObserver();
             
-            // Atualizar ano atual
+            // Atualizar ano
             updateCurrentYear();
-        });
-
-        // Smooth scrolling para links internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+            
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
             });
         });
+
+        // Animar ao rolar
+        window.addEventListener('scroll', handleScrollAnimations);
     </script>
 </body>
 </html>
