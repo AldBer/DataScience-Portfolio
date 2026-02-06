@@ -52,7 +52,7 @@
 - 📧 Email: aldo.bernardi@gmail.com
 - 💼 LinkedIn: [Aldo Bernardi](https://linkedin.com/in/aldobernardi)
 - 🔗 GitHub: [@AldBer](https://github.com/AldBer)
-- 🏆 Credly: [Badges](https://www.credly.com/users/aldo-bernardi)
+- 🏆 Credly: [Badges](https://www.credly.com/users/aldo-bernardi.5b9ee3e3/badges#credly)
 
 ## 📄 License
 MIT License - Veja [LICENSE](LICENSE) para detalhes.
