@@ -1,4 +1,4 @@
-# 🚀 Aldo Bernardi - Data Science & Cybersecurity Portfolio
+# 🚀 Aldo Bernardi - Smart Operations | Data, Automation & Technology
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://aldber.github.io/DataScience-Portfolio/)
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue)]()
